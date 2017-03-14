@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Worship.tonalidade>
+
+@{
+    ViewBag.Title = "Tonalidades";
+}
+
+<h2>Tonalidades</h2>
+
+<p>
+    @Html.ActionLink("Criar nova", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tx_tonalidade)
+        </th>
+        <th>    
+            @Html.DisplayNameFor(model => model.tx_descricao_tonalidade)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nr_posicao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ind_maior_menor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nrHinosUsando)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.OrderBy(i => i.nr_posicao)) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tx_tonalidade)
+        </td>
+        <td>
+            @Html.ActionLink(@Html.Raw(item.tx_descricao_tonalidade).ToString(), "Edit", new { id = item.tx_tonalidade })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nr_posicao)
+        </td>
+        <td>
+            @if (item.ind_maior_menor == "+") { @Html.Raw("Maior") } else { @Html.Raw("Menor") }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nrHinosUsando)
+        </td>
+        <td>
+            @if (item.nrHinosUsando == 0) { 
+                <a href="@Url.Action("Delete", new { id = item.tx_tonalidade })">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span class="sr-only">Excluir</span>
+                </a>
+            }
+        </td>
+    </tr>
+}
+
+</table>

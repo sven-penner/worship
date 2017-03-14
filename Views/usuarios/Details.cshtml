@@ -1,0 +1,58 @@
+﻿@model Worship.usuario
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_nome_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_nome_usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_nome_guerra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_nome_guerra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_senha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_senha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dt_ultimo_login)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dt_ultimo_login)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.tx_login }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

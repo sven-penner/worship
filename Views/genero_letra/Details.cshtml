@@ -1,0 +1,26 @@
+﻿@model Worship.genero_letra
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>genero_letra</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_genero_letra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_genero_letra)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cd_genero_letra }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

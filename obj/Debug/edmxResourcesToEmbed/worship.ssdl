@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="worshipModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="equipe">
+    <Key>
+      <PropertyRef Name="cd_equipe" />
+    </Key>
+    <Property Name="cd_equipe" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tx_nome_equipe" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="nr_ano" Type="tinyint" Nullable="false" />
+    <Property Name="nr_domingo" Type="bool" />
+    <Property Name="cd_integrante_lider" Type="varchar" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="equipe_integrante">
+    <Key>
+      <PropertyRef Name="cd_equipe" />
+      <PropertyRef Name="cd_integrante" />
+    </Key>
+    <Property Name="cd_equipe" Type="tinyint" Nullable="false" />
+    <Property Name="cd_integrante" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="evento">
+    <Key>
+      <PropertyRef Name="dt_evento" />
+    </Key>
+    <Property Name="dt_evento" Type="date" Nullable="false" />
+    <Property Name="cd_tipo_evento" Type="tinyint" Nullable="false" />
+    <Property Name="cd_equipe" Type="tinyint" />
+    <Property Name="tx_comentarios" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="evento_integrante">
+    <Key>
+      <PropertyRef Name="dt_evento" />
+      <PropertyRef Name="cd_integrante" />
+    </Key>
+    <Property Name="dt_evento" Type="date" Nullable="false" />
+    <Property Name="cd_integrante" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="evento_musica">
+    <Key>
+      <PropertyRef Name="dt_evento" />
+      <PropertyRef Name="cd_hino" />
+    </Key>
+    <Property Name="dt_evento" Type="date" Nullable="false" />
+    <Property Name="cd_hino" Type="usmallint" Nullable="false" />
+    <Property Name="nr_sequencia" Type="tinyint" />
+  </EntityType>
+  <EntityType Name="genero_letra">
+    <Key>
+      <PropertyRef Name="cd_genero_letra" />
+    </Key>
+    <Property Name="cd_genero_letra" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tx_genero_letra" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="genero_musica">
+    <Key>
+      <PropertyRef Name="cd_genero_musica" />
+    </Key>
+    <Property Name="cd_genero_musica" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tx_genero_musica" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="hino">
+    <Key>
+      <PropertyRef Name="cd_hino" />
+    </Key>
+    <Property Name="cd_hino" Type="usmallint" Nullable="false" />
+    <Property Name="tx_titulo_hino" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tx_inicio" Type="varchar" MaxLength="50" />
+    <Property Name="tx_nome_compositor_letra" Type="varchar" MaxLength="50" />
+    <Property Name="tx_nome_compositor_musica" Type="varchar" MaxLength="50" />
+    <Property Name="nr_ano" Type="uint" />
+    <Property Name="tx_tonalidade" Type="char" MaxLength="3" Nullable="false" />
+  </EntityType>
+  <EntityType Name="hino_genero">
+    <Key>
+      <PropertyRef Name="cd_hino" />
+      <PropertyRef Name="cd_genero" />
+      <PropertyRef Name="id_genero" />
+    </Key>
+    <Property Name="cd_hino" Type="usmallint" Nullable="false" />
+    <Property Name="cd_genero" Type="tinyint" Nullable="false" />
+    <Property Name="id_genero" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="integrante">
+    <Key>
+      <PropertyRef Name="cd_integrante" />
+    </Key>
+    <Property Name="cd_integrante" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tx_nome_integrante" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="tx_email_integrante" Type="varchar" MaxLength="45" />
+    <Property Name="tx_nome_curto_integrante" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="tipo_evento">
+    <Key>
+      <PropertyRef Name="cd_tipo_evento" />
+    </Key>
+    <Property Name="cd_tipo_evento" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tx_tipo_evento" Type="varchar" MaxLength="45" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tonalidade">
+    <Key>
+      <PropertyRef Name="tx_tonalidade" />
+    </Key>
+    <Property Name="tx_tonalidade" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="tx_descricao_tonalidade" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="nr_posicao" Type="tinyint" Nullable="false" />
+    <Property Name="ind_maior_menor" Type="varchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="tx_login" />
+    </Key>
+    <Property Name="tx_login" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="tx_nome_usuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tx_nome_guerra" Type="varchar" MaxLength="25" />
+    <Property Name="tx_senha" Type="varchar" MaxLength="32" Nullable="false" />
+    <Property Name="tx_email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="dt_ultimo_login" Type="timestamp" Precision="0" />
+  </EntityType>
+  <EntityContainer Name="worshipModelStoreContainer">
+    <EntitySet Name="equipe" EntityType="Self.equipe" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="equipe_integrante" EntityType="Self.equipe_integrante" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="evento" EntityType="Self.evento" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="evento_integrante" EntityType="Self.evento_integrante" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="evento_musica" EntityType="Self.evento_musica" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="genero_letra" EntityType="Self.genero_letra" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="genero_musica" EntityType="Self.genero_musica" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="hino" EntityType="Self.hino" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="hino_genero" EntityType="Self.hino_genero" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="integrante" EntityType="Self.integrante" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="tipo_evento" EntityType="Self.tipo_evento" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="tonalidade" EntityType="Self.tonalidade" Schema="worship" store:Type="Tables" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" Schema="worship" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,67 @@
+﻿@model Worship.tonalidade
+
+@{
+    ViewBag.Title = "Editar tonalidade";
+}
+
+<h2>Editar tonalidade</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.tx_tonalidade)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tx_tonalidade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.tx_tonalidade)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tx_descricao_tonalidade, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.tx_descricao_tonalidade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.tx_descricao_tonalidade, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nr_posicao, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.nr_posicao, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nr_posicao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ind_maior_menor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(model => model.ind_maior_menor, "+", new { id = "+" })
+                @Html.Label("+", "Maior")
+                @Html.RadioButtonFor(model => model.ind_maior_menor, "-", new { id = "-" })
+                @Html.Label("-", "Menor")<br />
+                @Html.ValidationMessageFor(model => model.ind_maior_menor, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

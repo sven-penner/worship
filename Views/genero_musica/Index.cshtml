@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Worship.genero_musica>
+
+@{
+    ViewBag.Title = "Gêneros";
+}
+
+<h2>Gêneros</h2>
+
+<p>
+    @Html.ActionLink("Criar novo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tx_genero_musica)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nrHinosUsando)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.OrderBy(i => i.tx_genero_musica)) {
+    <tr>
+        <td>
+            @Html.ActionLink(@Html.Raw(item.tx_genero_musica).ToString(), "Edit", new { id = item.cd_genero_musica })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nrHinosUsando)
+        </td>
+        <td>
+            @if (item.nrHinosUsando == 0)
+            {
+                <a href="@Url.Action("Delete", new { id = item.cd_genero_musica })">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span class="sr-only">Excluir</span>
+                </a>
+            }
+        </td>
+    </tr>
+}
+
+</table>

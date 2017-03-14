@@ -1,0 +1,29 @@
+﻿@model Worship.tipo_evento
+
+@{
+    ViewBag.Title = "Excluir tipo de evento";
+}
+
+<h2>Excluir tipo de evento</h2>
+
+<h3>Tem certeza que deseja excluir este tipo de evento?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_tipo_evento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.tx_tipo_evento)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Index")
+        </div>
+    }
+</div>

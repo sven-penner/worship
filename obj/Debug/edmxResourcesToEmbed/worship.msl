@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="worshipModelStoreContainer" CdmEntityContainer="worshipEntities">
+    <EntitySetMapping Name="genero_letra">
+      <EntityTypeMapping TypeName="worshipModel.genero_letra">
+        <MappingFragment StoreEntitySet="genero_letra">
+          <ScalarProperty Name="cd_genero_letra" ColumnName="cd_genero_letra" />
+          <ScalarProperty Name="tx_genero_letra" ColumnName="tx_genero_letra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="genero_musica">
+      <EntityTypeMapping TypeName="worshipModel.genero_musica">
+        <MappingFragment StoreEntitySet="genero_musica">
+          <ScalarProperty Name="cd_genero_musica" ColumnName="cd_genero_musica" />
+          <ScalarProperty Name="tx_genero_musica" ColumnName="tx_genero_musica" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tonalidade">
+      <EntityTypeMapping TypeName="worshipModel.tonalidade">
+        <MappingFragment StoreEntitySet="tonalidade">
+          <ScalarProperty Name="ind_maior_menor" ColumnName="ind_maior_menor" />
+          <ScalarProperty Name="tx_tonalidade" ColumnName="tx_tonalidade" />
+          <ScalarProperty Name="tx_descricao_tonalidade" ColumnName="tx_descricao_tonalidade" />
+          <ScalarProperty Name="nr_posicao" ColumnName="nr_posicao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="worshipModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="tx_login" ColumnName="tx_login" />
+          <ScalarProperty Name="tx_nome_usuario" ColumnName="tx_nome_usuario" />
+          <ScalarProperty Name="tx_nome_guerra" ColumnName="tx_nome_guerra" />
+          <ScalarProperty Name="tx_senha" ColumnName="tx_senha" />
+          <ScalarProperty Name="tx_email" ColumnName="tx_email" />
+          <ScalarProperty Name="dt_ultimo_login" ColumnName="dt_ultimo_login" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hino">
+      <EntityTypeMapping TypeName="worshipModel.hino">
+        <MappingFragment StoreEntitySet="hino">
+          <ScalarProperty Name="tx_tonalidade" ColumnName="tx_tonalidade" />
+          <ScalarProperty Name="nr_ano" ColumnName="nr_ano" />
+          <ScalarProperty Name="tx_nome_compositor_musica" ColumnName="tx_nome_compositor_musica" />
+          <ScalarProperty Name="tx_nome_compositor_letra" ColumnName="tx_nome_compositor_letra" />
+          <ScalarProperty Name="tx_inicio" ColumnName="tx_inicio" />
+          <ScalarProperty Name="tx_titulo_hino" ColumnName="tx_titulo_hino" />
+          <ScalarProperty Name="cd_hino" ColumnName="cd_hino" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hino_genero">
+      <EntityTypeMapping TypeName="worshipModel.hino_genero">
+        <MappingFragment StoreEntitySet="hino_genero">
+          <ScalarProperty Name="id_genero" ColumnName="id_genero" />
+          <ScalarProperty Name="cd_genero" ColumnName="cd_genero" />
+          <ScalarProperty Name="cd_hino" ColumnName="cd_hino" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipe">
+      <EntityTypeMapping TypeName="worshipModel.equipe">
+        <MappingFragment StoreEntitySet="equipe">
+          <ScalarProperty Name="cd_integrante_lider" ColumnName="cd_integrante_lider" />
+          <ScalarProperty Name="nr_domingo" ColumnName="nr_domingo" />
+          <ScalarProperty Name="nr_ano" ColumnName="nr_ano" />
+          <ScalarProperty Name="tx_nome_equipe" ColumnName="tx_nome_equipe" />
+          <ScalarProperty Name="cd_equipe" ColumnName="cd_equipe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="equipe_integrante">
+      <EntityTypeMapping TypeName="worshipModel.equipe_integrante">
+        <MappingFragment StoreEntitySet="equipe_integrante">
+          <ScalarProperty Name="cd_integrante" ColumnName="cd_integrante" />
+          <ScalarProperty Name="cd_equipe" ColumnName="cd_equipe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="evento">
+      <EntityTypeMapping TypeName="worshipModel.evento">
+        <MappingFragment StoreEntitySet="evento">
+          <ScalarProperty Name="cd_tipo_evento" ColumnName="cd_tipo_evento" />
+          <ScalarProperty Name="tx_comentarios" ColumnName="tx_comentarios" />
+          <ScalarProperty Name="cd_equipe" ColumnName="cd_equipe" />
+          <ScalarProperty Name="dt_evento" ColumnName="dt_evento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="evento_integrante">
+      <EntityTypeMapping TypeName="worshipModel.evento_integrante">
+        <MappingFragment StoreEntitySet="evento_integrante">
+          <ScalarProperty Name="cd_integrante" ColumnName="cd_integrante" />
+          <ScalarProperty Name="dt_evento" ColumnName="dt_evento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="evento_musica">
+      <EntityTypeMapping TypeName="worshipModel.evento_musica">
+        <MappingFragment StoreEntitySet="evento_musica">
+          <ScalarProperty Name="nr_sequencia" ColumnName="nr_sequencia" />
+          <ScalarProperty Name="cd_hino" ColumnName="cd_hino" />
+          <ScalarProperty Name="dt_evento" ColumnName="dt_evento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="integrante">
+      <EntityTypeMapping TypeName="worshipModel.integrante">
+        <MappingFragment StoreEntitySet="integrante">
+          <ScalarProperty Name="tx_nome_curto_integrante" ColumnName="tx_nome_curto_integrante" />
+          <ScalarProperty Name="tx_email_integrante" ColumnName="tx_email_integrante" />
+          <ScalarProperty Name="tx_nome_integrante" ColumnName="tx_nome_integrante" />
+          <ScalarProperty Name="cd_integrante" ColumnName="cd_integrante" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tipo_evento">
+      <EntityTypeMapping TypeName="worshipModel.tipo_evento">
+        <MappingFragment StoreEntitySet="tipo_evento">
+          <ScalarProperty Name="cd_tipo_evento" ColumnName="cd_tipo_evento" />
+          <ScalarProperty Name="tx_tipo_evento" ColumnName="tx_tipo_evento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

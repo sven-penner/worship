@@ -11,7 +11,8 @@ namespace Worship
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class integrante
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,10 +21,19 @@ namespace Worship
             this.equipe_integrantes = new HashSet<equipe_integrante>();
             this.evento_integrantes = new HashSet<evento_integrante>();
         }
-    
+
+        [Key]
         public sbyte cd_integrante { get; set; }
+        [Required(ErrorMessage = "Digite o nome completo do integrante")]
+        [StringLength(45, ErrorMessage = "Nome do integrante deve ter no máximo 45 caracteres")]
+        [Display(Name = "Nome do integrante")]
         public string tx_nome_integrante { get; set; }
+        [StringLength(45, ErrorMessage = "Email do integrante deve ter no máximo 45 caracteres")]
+        [EmailAddress(ErrorMessage = "Endereço de email inválido")]
+        [Display(Name = "Email do integrante")]
         public string tx_email_integrante { get; set; }
+        [StringLength(15, ErrorMessage = "Nome curto do integrante deve ter no máximo 15 caracteres")]
+        [Display(Name = "Nome curto do integrante")]
         public string tx_nome_curto_integrante { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

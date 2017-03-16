@@ -1,0 +1,42 @@
+﻿@model Worship.integrante
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>integrante</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_nome_integrante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_nome_integrante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_email_integrante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_email_integrante)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_nome_curto_integrante)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_nome_curto_integrante)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cd_integrante }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

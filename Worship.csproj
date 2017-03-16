@@ -239,6 +239,7 @@
     <Compile Include="integrante.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\integrantesController.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -369,6 +370,11 @@
     <Content Include="Views\tipo_evento\Details.cshtml" />
     <Content Include="Views\tipo_evento\Edit.cshtml" />
     <Content Include="Views\tipo_evento\Index.cshtml" />
+    <Content Include="Views\integrantes\Create.cshtml" />
+    <Content Include="Views\integrantes\Delete.cshtml" />
+    <Content Include="Views\integrantes\Details.cshtml" />
+    <Content Include="Views\integrantes\Edit.cshtml" />
+    <Content Include="Views\integrantes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

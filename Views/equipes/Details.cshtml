@@ -1,0 +1,50 @@
+﻿@model Worship.equipe
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>equipe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_nome_equipe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_nome_equipe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nr_ano)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nr_ano)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nr_domingo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nr_domingo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cd_integrante_lider)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cd_integrante_lider)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cd_equipe }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

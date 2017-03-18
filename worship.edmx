@@ -11,9 +11,9 @@
           </Key>
           <Property Name="cd_equipe" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tx_nome_equipe" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="nr_ano" Type="tinyint" Nullable="false" />
-          <Property Name="nr_domingo" Type="bool" />
-          <Property Name="cd_integrante_lider" Type="varchar" MaxLength="45" />
+          <Property Name="nr_ano" Type="smallint" Nullable="false" />
+          <Property Name="nr_domingo" Type="tinyint" />
+          <Property Name="cd_integrante_lider" Type="tinyint" />
         </EntityType>
         <EntityType Name="equipe_integrante">
           <Key>
@@ -235,6 +235,10 @@
             <End Role="integrante" EntitySet="integrante" />
             <End Role="evento_integrante" EntitySet="evento_integrante" />
           </AssociationSet>
+          <AssociationSet Name="integrante_equipe" Association="worshipModel.integrante_equipe">
+            <End Role="integrante" EntitySet="integrante" />
+            <End Role="equipe" EntitySet="equipe" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="hino">
           <Key>
@@ -318,10 +322,11 @@
           </Key>
           <Property Name="cd_equipe" Type="SByte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tx_nome_equipe" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="nr_ano" Type="SByte" Nullable="false" />
-          <Property Name="nr_domingo" Type="Boolean" />
-          <Property Name="cd_integrante_lider" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="nr_ano" Type="Int16" Nullable="false" />
+          <Property Name="nr_domingo" Type="SByte" />
+          <Property Name="cd_integrante_lider" Type="SByte" />
           <NavigationProperty Name="equipe_integrantes" Relationship="worshipModel.equipe_equipe_integrante" FromRole="equipe" ToRole="equipe_integrante" />
+          <NavigationProperty Name="lider" Relationship="worshipModel.integrante_equipe" FromRole="equipe" ToRole="integrante" />
         </EntityType>
         <EntityType Name="equipe_integrante">
           <Key>
@@ -376,6 +381,7 @@
           <Property Name="tx_nome_curto_integrante" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="equipe_integrantes" Relationship="worshipModel.integrante_equipe_integrante" FromRole="integrante" ToRole="equipe_integrante" />
           <NavigationProperty Name="evento_integrantes" Relationship="worshipModel.integrante_evento_integrante" FromRole="integrante" ToRole="evento_integrante" />
+          <NavigationProperty Name="equipes" Relationship="worshipModel.integrante_equipe" FromRole="integrante" ToRole="equipe" />
         </EntityType>
         <EntityType Name="tipo_evento">
           <Key>
@@ -466,6 +472,18 @@
             </Principal>
             <Dependent Role="evento_integrante">
               <PropertyRef Name="cd_integrante" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="integrante_equipe">
+          <End Type="worshipModel.integrante" Role="integrante" Multiplicity="0..1" />
+          <End Type="worshipModel.equipe" Role="equipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="integrante">
+              <PropertyRef Name="cd_integrante" />
+            </Principal>
+            <Dependent Role="equipe">
+              <PropertyRef Name="cd_integrante_lider" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

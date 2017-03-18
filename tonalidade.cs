@@ -20,7 +20,7 @@ namespace Worship
         {
             this.hinos = new HashSet<hino>();
         }
-    
+
         [Key]
         [Required(ErrorMessage = "Digite a tonalidade")]
         [StringLength(3, ErrorMessage = "Tonalidade deve ter no máximo 3 caracteres")]
@@ -31,7 +31,7 @@ namespace Worship
         [Display(Name = "Descrição da tonalidade")]
         public string tx_descricao_tonalidade { get; set; }
         [Required(ErrorMessage = "Informe a posição relativa da tonalidade (0=C;1=C#;...)")]
-        [Range(0,11,ErrorMessage = "Posição deve ter valores entre 0 e 11")]
+        [Range(0, 11, ErrorMessage = "Posição deve ter valores entre 0 e 11")]
         [Display(Name = "Posição")]
         public sbyte nr_posicao { get; set; }
         [Required(ErrorMessage = "Informe a escala")]

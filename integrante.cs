@@ -20,6 +20,7 @@ namespace Worship
         {
             this.equipe_integrantes = new HashSet<equipe_integrante>();
             this.evento_integrantes = new HashSet<evento_integrante>();
+            this.equipes = new HashSet<equipe>();
         }
 
         [Key]
@@ -40,5 +41,7 @@ namespace Worship
         public virtual ICollection<equipe_integrante> equipe_integrantes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<evento_integrante> evento_integrantes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<equipe> equipes { get; set; }
     }
 }

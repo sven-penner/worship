@@ -1,0 +1,74 @@
+﻿@model Worship.equipe
+
+@{
+    ViewBag.Title = "Editar equipe";
+}
+
+<h2>Editar equipe</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.cd_equipe)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.tx_nome_equipe, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.tx_nome_equipe)
+                @Html.HiddenFor(model => model.tx_nome_equipe)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nr_ano, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.nr_ano)
+                @Html.HiddenFor(model => model.nr_ano)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.nr_domingo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.RadioButtonFor(model => model.nr_domingo, "1", new { id = "1" })
+                @Html.Label("1", "Primeiro")
+                @Html.RadioButtonFor(model => model.nr_domingo, "2", new { id = "2" })
+                @Html.Label("2", "Segundo")
+                @Html.RadioButtonFor(model => model.nr_domingo, "3", new { id = "3" })
+                @Html.Label("3", "Terceiro")
+                @Html.RadioButtonFor(model => model.nr_domingo, "4", new { id = "4" })
+                @Html.Label("4", "Quarto")
+                @Html.RadioButtonFor(model => model.nr_domingo, "5", new { id = "5" })
+                @Html.Label("5", "Quinto")<br />
+                @Html.ValidationMessageFor(model => model.nr_domingo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.cd_integrante_lider, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.cd_integrante_lider, new SelectList(@ViewBag.ddList, "Value", "Text"), new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.cd_integrante_lider, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

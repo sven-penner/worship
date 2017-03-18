@@ -11,7 +11,8 @@ namespace Worship
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class equipe
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,14 +20,27 @@ namespace Worship
         {
             this.equipe_integrantes = new HashSet<equipe_integrante>();
         }
-    
+
+        [Key]
         public sbyte cd_equipe { get; set; }
+        [Required(ErrorMessage = "Digite o nome da equipe")]
+        [StringLength(10, ErrorMessage = "Nome da equipe deve ter no máximo 10 caracteres")]
+        [Display(Name = "Nome da equipe")]
         public string tx_nome_equipe { get; set; }
-        public sbyte nr_ano { get; set; }
-        public Nullable<bool> nr_domingo { get; set; }
-        public string cd_integrante_lider { get; set; }
+        [Required(ErrorMessage = "Escolha o ano de referência")]
+        [Range(2016, 2025, ErrorMessage = "Ano inválido")]
+        [Display(Name = "Ano")]
+        public short nr_ano { get; set; }
+        [Range(1, 5, ErrorMessage = "Domingo deve ser um número entre 1 e 5")]
+        [Display(Name = "Domingo do mês")]
+        public Nullable<sbyte> nr_domingo { get; set; }
+        [Display(Name = "Líder da equipe")]
+        public Nullable<sbyte> cd_integrante_lider { get; set; }
     
+        public int nrIntegrantes { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<equipe_integrante> equipe_integrantes { get; set; }
+        public virtual integrante lider { get; set; }
     }
 }

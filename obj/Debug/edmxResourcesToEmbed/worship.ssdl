@@ -6,9 +6,9 @@
     </Key>
     <Property Name="cd_equipe" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="tx_nome_equipe" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="nr_ano" Type="tinyint" Nullable="false" />
-    <Property Name="nr_domingo" Type="bool" />
-    <Property Name="cd_integrante_lider" Type="varchar" MaxLength="45" />
+    <Property Name="nr_ano" Type="smallint" Nullable="false" />
+    <Property Name="nr_domingo" Type="tinyint" />
+    <Property Name="cd_integrante_lider" Type="tinyint" />
   </EntityType>
   <EntityType Name="equipe_integrante">
     <Key>

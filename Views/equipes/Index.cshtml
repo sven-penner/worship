@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Worship.equipe>
+
+@{
+    ViewBag.Title = "Equipes";
+}
+
+<h2>Equipes</h2>
+
+<p>
+    <button type="button" class="btn btn-primary">
+        @Html.ActionLink("Criar nova", "Create", null, new { @style = "color:white;" })
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tx_nome_equipe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nr_ano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nr_domingo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cd_integrante_lider)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.ActionLink(@Html.Raw(item.tx_nome_equipe).ToString(), "Edit", new { id = item.cd_equipe })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nr_ano)
+        </td>
+        <td>
+            @{ switch (item.nr_domingo)
+                {
+                    case 1:
+                        @Html.Raw("Primeiro");
+                        break;
+                    case 2:
+                        @Html.Raw("Segundo");
+                        break;
+                    case 3:
+                        @Html.Raw("Terceiro");
+                        break;
+                    case 4:
+                        @Html.Raw("Quarto");
+                        break;
+                    case 5:
+                        @Html.Raw("Quinto");
+                            break;
+                    }
+                }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lider.tx_nome_integrante)
+        </td>
+        <td>
+            @if (item.nrIntegrantes == 0)
+            {
+                <a href="@Url.Action("Delete", new { id = item.cd_equipe })">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span class="sr-only">Excluir</span>
+                </a>
+            }
+        </td>
+    </tr>
+}
+
+</table>

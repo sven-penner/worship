@@ -1,0 +1,26 @@
+﻿@model ICollection<Worship.equipe_integrante>
+
+@{
+    ViewBag.Title = "";
+}
+
+@{
+    var count = 0;
+    @Html.Raw("<div class='form-group'>")
+    foreach (var item in Model)
+    {
+        if (count == 0)
+        {
+            <label class="control-label col-md-12">Integrantes</label>
+        }
+        @Html.Raw("<div class='col-md-12'>")
+        @Html.DisplayFor(modelItem => item.integrante.tx_nome_integrante)
+        <a href="#" id="Excluir_@Html.Raw(item.cd_integrante)" class="Excluir" value="@Html.Raw(item.cd_integrante)">
+            <i class="glyphicon glyphicon-trash" title="Excluir integrante"></i>
+            <span class="sr-only">Excluir</span>
+        </a>
+        @Html.Raw("</div>")
+        count++;
+    }
+    @Html.Raw("</div>")
+}

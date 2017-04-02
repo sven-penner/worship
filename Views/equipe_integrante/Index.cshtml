@@ -1,0 +1,53 @@
+﻿@model Worship.equipe
+
+@{
+    ViewBag.Title = "Adicionar integrantes";
+}
+
+<h2>Adicionar integrantes</h2>
+
+    <table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tx_nome_equipe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nr_ano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nr_domingo)
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.tx_nome_equipe)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.nr_ano)
+        </td>
+        <td>
+            @{ switch (Model.nr_domingo)
+                {
+                    case 1:
+                        @Html.Raw("Primeiro");
+                        break;
+                    case 2:
+                        @Html.Raw("Segundo");
+                        break;
+                    case 3:
+                        @Html.Raw("Terceiro");
+                        break;
+                    case 4:
+                        @Html.Raw("Quarto");
+                        break;
+                    case 5:
+                        @Html.Raw("Quinto");
+                        break;
+                }
+            }
+        </td>
+        <th></th>
+    </tr>
+
+</table>

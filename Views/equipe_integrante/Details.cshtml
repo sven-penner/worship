@@ -1,0 +1,42 @@
+﻿@model Worship.equipe_integrante
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>equipe_integrante</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.equipe.tx_nome_equipe)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.equipe.tx_nome_equipe)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.integrante.tx_nome_integrante)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.integrante.tx_nome_integrante)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

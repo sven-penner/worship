@@ -28,49 +28,64 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.ActionLink(@Html.Raw(item.tx_nome_equipe).ToString(), "Edit", new { id = item.cd_equipe })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.nr_ano)
-        </td>
-        <td>
-            @{ switch (item.nr_domingo)
-                {
-                    case 1:
-                        @Html.Raw("Primeiro");
-                        break;
-                    case 2:
-                        @Html.Raw("Segundo");
-                        break;
-                    case 3:
-                        @Html.Raw("Terceiro");
-                        break;
-                    case 4:
-                        @Html.Raw("Quarto");
-                        break;
-                    case 5:
-                        @Html.Raw("Quinto");
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(@Html.Raw(item.tx_nome_equipe).ToString(), "Edit", new { id = item.cd_equipe })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nr_ano)
+            </td>
+            <td>
+                @{ switch (item.nr_domingo)
+                    {
+                        case 1:
+                            @Html.Raw("Primeiro");
                             break;
+                        case 2:
+                            @Html.Raw("Segundo");
+                            break;
+                        case 3:
+                            @Html.Raw("Terceiro");
+                            break;
+                        case 4:
+                            @Html.Raw("Quarto");
+                            break;
+                        case 5:
+                            @Html.Raw("Quinto");
+                            break;
+                        }
                     }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lider.tx_nome_integrante)
+            </td>
+            <td>
+                @if (item.nrIntegrantes == 0)
+                {
+                    <a href="@Url.Action("Delete", new { id = item.cd_equipe })">
+                        <i class="glyphicon glyphicon-trash" title="Excluir equipe"></i>
+                        <span class="sr-only">Excluir</span>
+                    </a>
                 }
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.lider.tx_nome_integrante)
-        </td>
-        <td>
-            @if (item.nrIntegrantes == 0)
-            {
-                <a href="@Url.Action("Delete", new { id = item.cd_equipe })">
-                    <i class="glyphicon glyphicon-trash"></i>
-                    <span class="sr-only">Excluir</span>
-                </a>
-            }
-        </td>
-    </tr>
+            </td>
+        </tr>
+        if (item.nrIntegrantes > 0)
+        {
+            @Html.Partial("_IntegrantesEquipe", item.equipe_integrantes)
+        }
+        else
+        {
+            <tr>
+                <td colspan='4'></td>
+                <td>
+                    <a href="@Url.Action("Edit/"+item.cd_equipe, "equipe_integrante")">
+                        <i class="glyphicon glyphicon-plus" title="Adicionar integrantes"></i>
+                        <span class="sr-only">Adicionar</span>
+                    </a>
+                </td>
+            </tr>
+        }
 }
-
 </table>

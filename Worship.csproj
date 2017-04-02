@@ -213,6 +213,7 @@
     <Compile Include="equipe_integrante.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\equipe_integranteController.cs" />
     <Compile Include="evento.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
@@ -382,6 +383,12 @@
     <Content Include="Views\equipes\Details.cshtml" />
     <Content Include="Views\equipes\Edit.cshtml" />
     <Content Include="Views\equipes\Index.cshtml" />
+    <Content Include="Views\equipes\_IntegrantesEquipe.cshtml" />
+    <Content Include="Views\equipe_integrante\Delete.cshtml" />
+    <Content Include="Views\equipe_integrante\Details.cshtml" />
+    <Content Include="Views\equipe_integrante\Edit.cshtml" />
+    <Content Include="Views\equipe_integrante\Index.cshtml" />
+    <Content Include="Views\equipe_integrante\_IntegrantesEquipeEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

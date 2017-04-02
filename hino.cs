@@ -11,7 +11,8 @@ namespace Worship
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class hino
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +21,8 @@ namespace Worship
             this.hino_generos = new HashSet<hino_genero>();
             this.evento_musicas = new HashSet<evento_musica>();
         }
-    
+
+        [Key]
         public int cd_hino { get; set; }
         public string tx_titulo_hino { get; set; }
         public string tx_inicio { get; set; }

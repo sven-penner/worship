@@ -11,10 +11,18 @@ namespace Worship
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class equipe_integrante
     {
+        [Key]
+        [Column(Order = 0)]
+        [Display(Name = "Equipe")]
         public sbyte cd_equipe { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        [Display(Name = "Integrante")]
         public sbyte cd_integrante { get; set; }
     
         public virtual equipe equipe { get; set; }

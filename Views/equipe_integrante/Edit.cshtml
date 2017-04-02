@@ -1,0 +1,99 @@
+﻿@model Worship.equipe
+
+@{
+    ViewBag.Title = "Editar integrantes";
+}
+
+<h2>Editar integrantes</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tx_nome_equipe)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nr_ano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nr_domingo)
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.tx_nome_equipe)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.nr_ano)
+        </td>
+        <td>
+            @{ switch (Model.nr_domingo)
+                {
+                    case 1:
+                        @Html.Raw("Primeiro");
+                        break;
+                    case 2:
+                        @Html.Raw("Segundo");
+                        break;
+                    case 3:
+                        @Html.Raw("Terceiro");
+                        break;
+                    case 4:
+                        @Html.Raw("Quarto");
+                        break;
+                    case 5:
+                        @Html.Raw("Quinto");
+                        break;
+                }
+            }
+        </td>
+        <th></th>
+    </tr>
+</table>
+
+    @using (Html.BeginForm("Create", "equipe_integrante"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.cd_equipe)
+
+            <div class="form-inline">
+                @Html.LabelFor(model => model.lider.tx_nome_integrante, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.DropDownList("cd_integrante", new SelectList(@ViewBag.ddList, "Value", "Text"), new { @class = "form-control" })
+                <button type="submit" class="btn btn-primary">
+                    <i class="glyphicon glyphicon-ok"></i> Adicionar
+                </button>
+            </div>
+        </div>
+    }
+<br /><br />
+
+@Html.HiddenFor(model => model.cd_equipe)
+@Html.Partial("_IntegrantesEquipeEdit", Model.equipe_integrantes)
+<br /><br />
+@Html.ActionLink("Voltar", "Index", "equipes")
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.Excluir').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Delete", "equipe_integrante")',
+                data: {
+                    __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                    cd_equipe: @Html.Raw(Model.cd_equipe),
+                    cd_integrante: $(this).attr('value')
+                },
+                success: function (data) {
+                    // Perform redirect
+                    window.location.href = data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Falha na exclusão do membro. Tente novamente mais tarde.');
+                }
+            });
+        });
+    });
+</script>

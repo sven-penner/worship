@@ -207,13 +207,13 @@
     <Compile Include="Controllers\genero_letraController.cs" />
     <Compile Include="Controllers\genero_musicaController.cs" />
     <Compile Include="Controllers\equipesController.cs" />
+    <Compile Include="Controllers\equipe_integranteController.cs" />
     <Compile Include="equipe.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
     <Compile Include="equipe_integrante.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\equipe_integranteController.cs" />
     <Compile Include="evento.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
@@ -236,6 +236,7 @@
     <Compile Include="hino.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\hinosController.cs" />
     <Compile Include="hino_genero.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
@@ -389,6 +390,11 @@
     <Content Include="Views\equipe_integrante\Edit.cshtml" />
     <Content Include="Views\equipe_integrante\Index.cshtml" />
     <Content Include="Views\equipe_integrante\_IntegrantesEquipeEdit.cshtml" />
+    <Content Include="Views\hinos\Create.cshtml" />
+    <Content Include="Views\hinos\Delete.cshtml" />
+    <Content Include="Views\hinos\Details.cshtml" />
+    <Content Include="Views\hinos\Edit.cshtml" />
+    <Content Include="Views\hinos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,15 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f26c4c4faefa46a796889fe26a397a2c" Name="DiagramWorship" ZoomLevel="73">
+      <Diagram DiagramId="f26c4c4faefa46a796889fe26a397a2c" Name="DiagramWorship" ZoomLevel="83">
         <EntityTypeShape EntityType="worshipModel.genero_letra" Width="1.875" PointX="6.25" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="worshipModel.genero_musica" Width="1.875" PointX="6.25" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="worshipModel.tonalidade" Width="1.5" PointX="0.5" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="worshipModel.usuario" Width="1.5" PointX="9" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="worshipModel.hino" Width="2.25" PointX="0.5" PointY="3.875" />
         <EntityTypeShape EntityType="worshipModel.hino_genero" Width="1.5" PointX="3.625" PointY="5.875" />
-        <AssociationConnector Association="worshipModel.tonalidade_hino" />
-        <AssociationConnector Association="worshipModel.hino_hino_genero" />
         <AssociationConnector Association="worshipModel.genero_musica_hino_genero" />
         <AssociationConnector Association="worshipModel.genero_letra_hino_genero" />
         <EntityTypeShape EntityType="worshipModel.equipe" Width="1.875" PointX="16.625" PointY="3.25" />
@@ -27,9 +24,12 @@
         <AssociationConnector Association="worshipModel.integrante_equipe_integrante" />
         <AssociationConnector Association="worshipModel.evento_evento_musica" />
         <AssociationConnector Association="worshipModel.evento_evento_integrante" />
-        <AssociationConnector Association="worshipModel.hino_evento_musica" />
         <AssociationConnector Association="worshipModel.integrante_evento_integrante" />
         <AssociationConnector Association="worshipModel.integrante_equipe" />
+        <EntityTypeShape EntityType="worshipModel.hino" Width="2.25" PointX="0.5" PointY="3.875" />
+        <AssociationConnector Association="worshipModel.tonalidade_hino" />
+        <AssociationConnector Association="worshipModel.hino_hino_genero" />
+        <AssociationConnector Association="worshipModel.hino_evento_musica" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -36,7 +36,7 @@ namespace Worship
         public Nullable<sbyte> nr_domingo { get; set; }
         [Display(Name = "Líder da equipe")]
         public Nullable<sbyte> cd_integrante_lider { get; set; }
-    
+
         public int nrIntegrantes { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

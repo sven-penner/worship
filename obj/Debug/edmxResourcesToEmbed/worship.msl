@@ -39,19 +39,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="hino">
-      <EntityTypeMapping TypeName="worshipModel.hino">
-        <MappingFragment StoreEntitySet="hino">
-          <ScalarProperty Name="tx_tonalidade" ColumnName="tx_tonalidade" />
-          <ScalarProperty Name="nr_ano" ColumnName="nr_ano" />
-          <ScalarProperty Name="tx_nome_compositor_musica" ColumnName="tx_nome_compositor_musica" />
-          <ScalarProperty Name="tx_nome_compositor_letra" ColumnName="tx_nome_compositor_letra" />
-          <ScalarProperty Name="tx_inicio" ColumnName="tx_inicio" />
-          <ScalarProperty Name="tx_titulo_hino" ColumnName="tx_titulo_hino" />
-          <ScalarProperty Name="cd_hino" ColumnName="cd_hino" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="hino_genero">
       <EntityTypeMapping TypeName="worshipModel.hino_genero">
         <MappingFragment StoreEntitySet="hino_genero">
@@ -122,6 +109,19 @@
         <MappingFragment StoreEntitySet="tipo_evento">
           <ScalarProperty Name="cd_tipo_evento" ColumnName="cd_tipo_evento" />
           <ScalarProperty Name="tx_tipo_evento" ColumnName="tx_tipo_evento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="hino">
+      <EntityTypeMapping TypeName="worshipModel.hino">
+        <MappingFragment StoreEntitySet="hino">
+          <ScalarProperty Name="tx_tonalidade" ColumnName="tx_tonalidade" />
+          <ScalarProperty Name="nr_ano" ColumnName="nr_ano" />
+          <ScalarProperty Name="tx_nome_compositor_musica" ColumnName="tx_nome_compositor_musica" />
+          <ScalarProperty Name="tx_nome_compositor_letra" ColumnName="tx_nome_compositor_letra" />
+          <ScalarProperty Name="tx_inicio" ColumnName="tx_inicio" />
+          <ScalarProperty Name="tx_titulo_hino" ColumnName="tx_titulo_hino" />
+          <ScalarProperty Name="cd_hino" ColumnName="cd_hino" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

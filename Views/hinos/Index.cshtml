@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Worship.hino>
+
+@{
+    ViewBag.Title = "Músicas";
+}
+
+<h2>Músicas</h2>
+
+<p>
+    <button type="button" class="btn btn-primary">
+        @Html.ActionLink("Criar nova", "Create", null, new { @style = "color:white;" })
+    </button>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tx_titulo_hino)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tx_inicio)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nrUtilizacoes)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.OrderBy(i => i.tx_titulo_hino)) {
+    <tr>
+        <td>
+            @Html.ActionLink(@Html.Raw(item.tx_titulo_hino).ToString(), "Edit", new { id = item.cd_hino })
+        </td>
+        <td>
+            @if (!item.tx_inicio.IsEmpty())
+            {
+                @Html.ActionLink(@Html.Raw(item.tx_inicio).ToString(), "Edit", new { id = item.cd_hino })
+            }
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nrUtilizacoes)
+        </td>
+        <td>
+            @if (item.nrUtilizacoes == 0)
+            {
+                <a href="@Url.Action("Delete", new { id = item.cd_hino })">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span class="sr-only">Excluir</span>
+                </a>
+            }
+        </td>
+    </tr>
+}
+
+</table>

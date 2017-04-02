@@ -23,8 +23,8 @@
     <Property Name="tx_tonalidade" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="tx_descricao_tonalidade" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="nr_posicao" Type="SByte" Nullable="false" />
-    <NavigationProperty Name="hinos" Relationship="worshipModel.tonalidade_hino" FromRole="tonalidade" ToRole="hino" />
     <Property Name="ind_maior_menor" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="hinos" Relationship="worshipModel.tonalidade_hino" FromRole="tonalidade" ToRole="hino" />
   </EntityType>
   <EntityType Name="usuario">
     <Key>
@@ -42,16 +42,7 @@
     <EntitySet Name="genero_musica" EntityType="Self.genero_musica" />
     <EntitySet Name="tonalidade" EntityType="Self.tonalidade" />
     <EntitySet Name="usuario" EntityType="Self.usuario" />
-    <EntitySet Name="hino" EntityType="worshipModel.hino" />
     <EntitySet Name="hino_genero" EntityType="worshipModel.hino_genero" />
-    <AssociationSet Name="tonalidade_hino" Association="worshipModel.tonalidade_hino">
-      <End Role="tonalidade" EntitySet="tonalidade" />
-      <End Role="hino" EntitySet="hino" />
-    </AssociationSet>
-    <AssociationSet Name="hinohino_genero" Association="worshipModel.hino_hino_genero">
-      <End Role="hino" EntitySet="hino" />
-      <End Role="hino_genero" EntitySet="hino_genero" />
-    </AssociationSet>
     <AssociationSet Name="genero_musicahino_genero" Association="worshipModel.genero_musica_hino_genero">
       <End Role="genero_musica" EntitySet="genero_musica" />
       <End Role="hino_genero" EntitySet="hino_genero" />
@@ -87,10 +78,6 @@
       <End Role="evento" EntitySet="evento" />
       <End Role="evento_integrante" EntitySet="evento_integrante" />
     </AssociationSet>
-    <AssociationSet Name="hino_evento_musica" Association="worshipModel.hino_evento_musica">
-      <End Role="hino" EntitySet="hino" />
-      <End Role="evento_musica" EntitySet="evento_musica" />
-    </AssociationSet>
     <AssociationSet Name="integrante_evento_integrante" Association="worshipModel.integrante_evento_integrante">
       <End Role="integrante" EntitySet="integrante" />
       <End Role="evento_integrante" EntitySet="evento_integrante" />
@@ -99,59 +86,33 @@
       <End Role="integrante" EntitySet="integrante" />
       <End Role="equipe" EntitySet="equipe" />
     </AssociationSet>
+    <EntitySet Name="hino" EntityType="worshipModel.hino" />
+    <AssociationSet Name="tonalidade_hino" Association="worshipModel.tonalidade_hino">
+      <End Role="tonalidade" EntitySet="tonalidade" />
+      <End Role="hino" EntitySet="hino" />
+    </AssociationSet>
+    <AssociationSet Name="hino_hino_genero" Association="worshipModel.hino_hino_genero">
+      <End Role="hino" EntitySet="hino" />
+      <End Role="hino_genero" EntitySet="hino_genero" />
+    </AssociationSet>
+    <AssociationSet Name="hino_evento_musica" Association="worshipModel.hino_evento_musica">
+      <End Role="hino" EntitySet="hino" />
+      <End Role="evento_musica" EntitySet="evento_musica" />
+    </AssociationSet>
   </EntityContainer>
-  <EntityType Name="hino">
-    <Key>
-      <PropertyRef Name="cd_hino" />
-    </Key>
-    <Property Name="cd_hino" Type="Int32" Nullable="false" />
-    <Property Name="tx_titulo_hino" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="tx_inicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="tx_nome_compositor_letra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="tx_nome_compositor_musica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="nr_ano" Type="Int64" />
-    <Property Name="tx_tonalidade" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="tonalidade" Relationship="worshipModel.tonalidade_hino" FromRole="hino" ToRole="tonalidade" />
-    <NavigationProperty Name="hino_generos" Relationship="worshipModel.hino_hino_genero" FromRole="hino" ToRole="hino_genero" />
-    <NavigationProperty Name="evento_musicas" Relationship="worshipModel.hino_evento_musica" FromRole="hino" ToRole="evento_musica" />
-  </EntityType>
   <EntityType Name="hino_genero">
     <Key>
       <PropertyRef Name="cd_hino" />
       <PropertyRef Name="cd_genero" />
       <PropertyRef Name="id_genero" />
     </Key>
-    <Property Name="cd_hino" Type="Int32" Nullable="false" />
+    <Property Name="cd_hino" Type="Int16" Nullable="false" />
     <Property Name="cd_genero" Type="SByte" Nullable="false" />
     <Property Name="id_genero" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="hino" Relationship="worshipModel.hino_hino_genero" FromRole="hino_genero" ToRole="hino" />
     <NavigationProperty Name="genero_musica" Relationship="worshipModel.genero_musica_hino_genero" FromRole="hino_genero" ToRole="genero_musica" />
     <NavigationProperty Name="genero_letra" Relationship="worshipModel.genero_letra_hino_genero" FromRole="hino_genero" ToRole="genero_letra" />
+    <NavigationProperty Name="hino" Relationship="worshipModel.hino_hino_genero" FromRole="hino_genero" ToRole="hino" />
   </EntityType>
-  <Association Name="tonalidade_hino">
-    <End Type="worshipModel.tonalidade" Role="tonalidade" Multiplicity="1" />
-    <End Type="worshipModel.hino" Role="hino" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="tonalidade">
-        <PropertyRef Name="tx_tonalidade" />
-      </Principal>
-      <Dependent Role="hino">
-        <PropertyRef Name="tx_tonalidade" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="hino_hino_genero">
-    <End Type="worshipModel.hino" Role="hino" Multiplicity="1" />
-    <End Type="worshipModel.hino_genero" Role="hino_genero" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="hino">
-        <PropertyRef Name="cd_hino" />
-      </Principal>
-      <Dependent Role="hino_genero">
-        <PropertyRef Name="cd_hino" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="genero_musica_hino_genero">
     <End Type="worshipModel.genero_musica" Role="genero_musica" Multiplicity="1" />
     <End Type="worshipModel.hino_genero" Role="hino_genero" Multiplicity="*" />
@@ -226,7 +187,7 @@
       <PropertyRef Name="cd_hino" />
     </Key>
     <Property Name="dt_evento" Type="DateTime" Nullable="false" />
-    <Property Name="cd_hino" Type="Int32" Nullable="false" />
+    <Property Name="cd_hino" Type="Int16" Nullable="false" />
     <Property Name="nr_sequencia" Type="SByte" />
     <NavigationProperty Name="evento" Relationship="worshipModel.evento_evento_musica" FromRole="evento_musica" ToRole="evento" />
     <NavigationProperty Name="hino" Relationship="worshipModel.hino_evento_musica" FromRole="evento_musica" ToRole="hino" />
@@ -311,18 +272,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="hino_evento_musica">
-    <End Type="worshipModel.hino" Role="hino" Multiplicity="1" />
-    <End Type="worshipModel.evento_musica" Role="evento_musica" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="hino">
-        <PropertyRef Name="cd_hino" />
-      </Principal>
-      <Dependent Role="evento_musica">
-        <PropertyRef Name="cd_hino" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="integrante_evento_integrante">
     <End Type="worshipModel.integrante" Role="integrante" Multiplicity="1" />
     <End Type="worshipModel.evento_integrante" Role="evento_integrante" Multiplicity="*" />
@@ -344,6 +293,57 @@
       </Principal>
       <Dependent Role="equipe">
         <PropertyRef Name="cd_integrante_lider" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="hino">
+    <Key>
+      <PropertyRef Name="cd_hino" />
+    </Key>
+    <Property Name="cd_hino" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tx_titulo_hino" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tx_inicio" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tx_nome_compositor_letra" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tx_nome_compositor_musica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="nr_ano" Type="Int64" />
+    <Property Name="tx_tonalidade" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tonalidade" Relationship="worshipModel.tonalidade_hino" FromRole="hino" ToRole="tonalidade" />
+    <NavigationProperty Name="hino_generos" Relationship="worshipModel.hino_hino_genero" FromRole="hino" ToRole="hino_genero" />
+    <NavigationProperty Name="evento_musicas" Relationship="worshipModel.hino_evento_musica" FromRole="hino" ToRole="evento_musica" />
+  </EntityType>
+  <Association Name="tonalidade_hino">
+    <End Type="worshipModel.tonalidade" Role="tonalidade" Multiplicity="1" />
+    <End Type="worshipModel.hino" Role="hino" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tonalidade">
+        <PropertyRef Name="tx_tonalidade" />
+      </Principal>
+      <Dependent Role="hino">
+        <PropertyRef Name="tx_tonalidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="hino_hino_genero">
+    <End Type="worshipModel.hino" Role="hino" Multiplicity="1" />
+    <End Type="worshipModel.hino_genero" Role="hino_genero" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hino">
+        <PropertyRef Name="cd_hino" />
+      </Principal>
+      <Dependent Role="hino_genero">
+        <PropertyRef Name="cd_hino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="hino_evento_musica">
+    <End Type="worshipModel.hino" Role="hino" Multiplicity="1" />
+    <End Type="worshipModel.evento_musica" Role="evento_musica" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="hino">
+        <PropertyRef Name="cd_hino" />
+      </Principal>
+      <Dependent Role="evento_musica">
+        <PropertyRef Name="cd_hino" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

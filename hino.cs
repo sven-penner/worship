@@ -23,14 +23,31 @@ namespace Worship
         }
 
         [Key]
-        public int cd_hino { get; set; }
+        public short cd_hino { get; set; }
+        [Required(ErrorMessage = "Digite o título da música")]
+        [StringLength(50, ErrorMessage = "O título da música deve ter no máximo 50 caracteres")]
+        [Display(Name = "Título")]
         public string tx_titulo_hino { get; set; }
+        [StringLength(50, ErrorMessage = "O início da música deve ter no máximo 50 caracteres")]
+        [Display(Name = "Início")]
         public string tx_inicio { get; set; }
+        [StringLength(50, ErrorMessage = "O nome do compositor da letra deve ter no máximo 50 caracteres")]
+        [Display(Name = "Letra")]
         public string tx_nome_compositor_letra { get; set; }
+        [StringLength(50, ErrorMessage = "O nome do compositor da m~usica deve ter no máximo 50 caracteres")]
+        [Display(Name = "Música")]
         public string tx_nome_compositor_musica { get; set; }
+        [Range(1000, 9999, ErrorMessage = "Ano inválido")]
+        [Display(Name = "Ano")]
         public Nullable<long> nr_ano { get; set; }
+        [Required(ErrorMessage = "Informe a tonalidade")]
+        [StringLength(3, ErrorMessage = "Tonalidade deve ter no máximo 3 caracteres")]
+        [Display(Name = "Tonalidade")]
         public string tx_tonalidade { get; set; }
-    
+
+        [Display(Name = "Utilizações")]
+        public int nrUtilizacoes { get; set; }
+
         public virtual tonalidade tonalidade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<hino_genero> hino_generos { get; set; }

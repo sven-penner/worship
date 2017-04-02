@@ -1,0 +1,66 @@
+﻿@model Worship.hino
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>hino</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_titulo_hino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_titulo_hino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_inicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_inicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_nome_compositor_letra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_nome_compositor_letra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_nome_compositor_musica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_nome_compositor_musica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nr_ano)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nr_ano)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tonalidade.tx_descricao_tonalidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tonalidade.tx_descricao_tonalidade)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.cd_hino }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

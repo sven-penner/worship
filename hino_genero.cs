@@ -14,12 +14,12 @@ namespace Worship
     
     public partial class hino_genero
     {
-        public int cd_hino { get; set; }
+        public short cd_hino { get; set; }
         public sbyte cd_genero { get; set; }
         public string id_genero { get; set; }
     
-        public virtual hino hino { get; set; }
         public virtual genero_musica genero_musica { get; set; }
         public virtual genero_letra genero_letra { get; set; }
+        public virtual hino hino { get; set; }
     }
 }

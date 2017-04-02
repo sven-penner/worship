@@ -15,7 +15,7 @@ namespace Worship
     public partial class evento_musica
     {
         public System.DateTime dt_evento { get; set; }
-        public int cd_hino { get; set; }
+        public short cd_hino { get; set; }
         public Nullable<sbyte> nr_sequencia { get; set; }
     
         public virtual evento evento { get; set; }

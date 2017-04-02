@@ -29,7 +29,6 @@ namespace Worship
         public virtual DbSet<genero_musica> genero_musica { get; set; }
         public virtual DbSet<tonalidade> tonalidade { get; set; }
         public virtual DbSet<usuario> usuario { get; set; }
-        public virtual DbSet<hino> hino { get; set; }
         public virtual DbSet<hino_genero> hino_genero { get; set; }
         public virtual DbSet<equipe> equipe { get; set; }
         public virtual DbSet<equipe_integrante> equipe_integrante { get; set; }
@@ -38,5 +37,6 @@ namespace Worship
         public virtual DbSet<evento_musica> evento_musica { get; set; }
         public virtual DbSet<integrante> integrante { get; set; }
         public virtual DbSet<tipo_evento> tipo_evento { get; set; }
+        public virtual DbSet<hino> hino { get; set; }
     }
 }

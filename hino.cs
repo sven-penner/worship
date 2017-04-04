@@ -12,6 +12,7 @@ namespace Worship
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public partial class hino
     {
@@ -23,6 +24,7 @@ namespace Worship
         }
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public short cd_hino { get; set; }
         [Required(ErrorMessage = "Digite o título da música")]
         [StringLength(50, ErrorMessage = "O título da música deve ter no máximo 50 caracteres")]

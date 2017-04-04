@@ -11,11 +11,22 @@ namespace Worship
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class hino_genero
     {
+        [Key]
+        [Column(Order = 0)]
+        [Display(Name = "Música")]
         public short cd_hino { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        [Display(Name = "Gênero")]
         public sbyte cd_genero { get; set; }
+        [Key]
+        [Column(Order = 2)]
+        [Display(Name = "Tipo")]
         public string id_genero { get; set; }
     
         public virtual genero_musica genero_musica { get; set; }

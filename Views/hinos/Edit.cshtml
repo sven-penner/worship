@@ -10,62 +10,113 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.cd_hino)
+        @Html.HiddenFor(model => model.tx_titulo_hino)
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tx_titulo_hino, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DisplayFor(model => model.tx_titulo_hino)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tx_inicio, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.tx_inicio, new { htmlAttributes = new { @class = "form-control", @placeholder = "Primeira frase da música..." } })
+                        @Html.ValidationMessageFor(model => model.tx_inicio, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tx_nome_compositor_letra, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.tx_nome_compositor_letra, new { htmlAttributes = new { @class = "form-control", @placeholder = "Autor da letra..." } })
+                        @Html.ValidationMessageFor(model => model.tx_nome_compositor_letra, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tx_nome_compositor_musica, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.tx_nome_compositor_musica, new { htmlAttributes = new { @class = "form-control", @placeholder = "Autor da música..." } })
+                        @Html.ValidationMessageFor(model => model.tx_nome_compositor_musica, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.nr_ano, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.nr_ano, new { htmlAttributes = new { @class = "form-control", @placeholder = "Ano de composição da música..." } })
+                        @Html.ValidationMessageFor(model => model.nr_ano, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tx_tonalidade, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("tx_tonalidade", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.tx_tonalidade, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Salvar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("Create", "hino_genero"))
+{
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.cd_hino)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.tx_titulo_hino, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DisplayFor(model => model.tx_titulo_hino)
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-inline">
+                    @Html.LabelFor(model => model.hino_generos.FirstOrDefault().genero_letra.tx_genero_letra, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DropDownList("cd_genero_letra", null, htmlAttributes: new { @class = "form-control" })
+                    <button type="submit" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-ok"></i> Adicionar
+                    </button>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.tx_inicio, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tx_inicio, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tx_inicio, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.tx_nome_compositor_letra, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tx_nome_compositor_letra, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tx_nome_compositor_letra, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.tx_nome_compositor_musica, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.tx_nome_compositor_musica, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.tx_nome_compositor_musica, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.nr_ano, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.nr_ano, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.nr_ano, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.tx_tonalidade, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("tx_tonalidade", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.tx_tonalidade, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Salvar" class="btn btn-default" />
+            <div class="col-md-6">
+                <div class="form-inline">
+                    @Html.LabelFor(model => model.hino_generos.FirstOrDefault().genero_musica.tx_genero_musica, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DropDownList("cd_genero_musica", null, htmlAttributes: new { @class = "form-control" })
+                    <button type="submit" class="btn btn-primary">
+                        <i class="glyphicon glyphicon-ok"></i> Adicionar
+                    </button>
+                </div>
             </div>
         </div>
     </div>

@@ -1,0 +1,48 @@
+﻿@model Worship.hino_genero
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>hino_genero</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.genero_musica.tx_genero_musica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genero_musica.tx_genero_musica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genero_letra.tx_genero_letra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genero_letra.tx_genero_letra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hino.tx_titulo_hino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hino.tx_titulo_hino)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

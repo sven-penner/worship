@@ -1,0 +1,42 @@
+﻿@model Worship.hino_genero
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>hino_genero</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.genero_musica.tx_genero_musica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genero_musica.tx_genero_musica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.genero_letra.tx_genero_letra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.genero_letra.tx_genero_letra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hino.tx_titulo_hino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hino.tx_titulo_hino)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

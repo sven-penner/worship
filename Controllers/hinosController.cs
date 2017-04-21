@@ -64,7 +64,7 @@ namespace Worship
                     db.hino.Add(hino);
                     db.SaveChanges();
                     //db.Entry(hino).GetDatabaseValues();
-                    return RedirectToAction("Edit", hino.cd_hino);
+                    return RedirectToAction("Edit", new { id = hino.cd_hino });
                 }
             }
 
@@ -130,6 +130,7 @@ namespace Worship
         public ActionResult DeleteConfirmed(short id)
         {
             hino hino = db.hino.Find(id);
+            db.hino_genero.RemoveRange(db.hino_genero.Where(hg => hg.cd_hino == hino.cd_hino));
             db.hino.Remove(hino);
             db.SaveChanges();
             return RedirectToAction("Index");

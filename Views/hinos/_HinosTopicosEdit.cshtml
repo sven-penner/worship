@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Worship.hino_genero>
+
+@{
+    ViewBag.Title = "";
+}
+
+@{
+    @Html.Raw("<br/><ul class='list-group'>")
+    foreach (var item in Model)
+    {
+        @Html.Raw("<li class='list-group-item'>")
+        @Html.DisplayFor(modelItem => item.genero_letra.tx_genero_letra)
+        <a href="#" id="L_@Html.Raw(item.cd_genero)" class="Excluir" style="float:right;" value="@Html.Raw(item.cd_genero)">
+            <i class="glyphicon glyphicon-trash" title="Excluir tópico"></i>
+            <span class="sr-only">Excluir</span>
+        </a>
+        @Html.Raw("</li>")
+    }
+    @Html.Raw("</ul>")
+}

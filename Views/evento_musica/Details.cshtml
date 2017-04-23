@@ -1,0 +1,42 @@
+﻿@model Worship.evento_musica
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>evento_musica</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nr_sequencia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nr_sequencia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.evento.tx_comentarios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.evento.tx_comentarios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hino.tx_titulo_hino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hino.tx_titulo_hino)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -8,11 +8,11 @@
         <EntityTypeShape EntityType="worshipModel.genero_letra" Width="1.875" PointX="6.25" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="worshipModel.genero_musica" Width="1.875" PointX="6.25" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="worshipModel.tonalidade" Width="1.5" PointX="0.5" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="worshipModel.usuario" Width="1.5" PointX="9" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="worshipModel.usuario" Width="1.5" PointX="10.75" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="worshipModel.hino_genero" Width="1.5" PointX="3.625" PointY="5.875" />
         <AssociationConnector Association="worshipModel.genero_musica_hino_genero" />
         <AssociationConnector Association="worshipModel.genero_letra_hino_genero" />
-        <EntityTypeShape EntityType="worshipModel.equipe" Width="1.875" PointX="16.625" PointY="3.25" />
+        <EntityTypeShape EntityType="worshipModel.equipe" Width="1.875" PointX="16.5" PointY="3.25" />
         <EntityTypeShape EntityType="worshipModel.equipe_integrante" Width="1.875" PointX="13.5" PointY="3.375" />
         <EntityTypeShape EntityType="worshipModel.evento" Width="1.5" PointX="6.625" PointY="0.5" />
         <EntityTypeShape EntityType="worshipModel.evento_integrante" Width="1.875" PointX="7.625" PointY="3.25" />
@@ -30,6 +30,7 @@
         <AssociationConnector Association="worshipModel.tonalidade_hino" />
         <AssociationConnector Association="worshipModel.hino_hino_genero" />
         <AssociationConnector Association="worshipModel.hino_evento_musica" />
+        <AssociationConnector Association="worshipModel.equipe_evento" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -11,10 +11,18 @@ namespace Worship
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class evento_integrante
     {
+        [Key]
+        [Column(Order = 0)]
+        [Display(Name = "Data do evento")]
         public System.DateTime dt_evento { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        [Display(Name = "Integrante")]
         public sbyte cd_integrante { get; set; }
     
         public virtual evento evento { get; set; }

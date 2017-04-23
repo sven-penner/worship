@@ -1,0 +1,48 @@
+﻿@model Worship.evento
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>evento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_comentarios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_comentarios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_evento.tx_tipo_evento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_evento.tx_tipo_evento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.equipe.tx_nome_equipe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.equipe.tx_nome_equipe)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

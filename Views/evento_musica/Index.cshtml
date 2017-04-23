@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Worship.evento_musica>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nr_sequencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.evento.tx_comentarios)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hino.tx_titulo_hino)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nr_sequencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.evento.tx_comentarios)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hino.tx_titulo_hino)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+        </td>
+    </tr>
+}
+
+</table>

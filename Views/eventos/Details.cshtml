@@ -1,0 +1,42 @@
+﻿@model Worship.evento
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>evento</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_comentarios)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tx_comentarios)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tipo_evento.tx_tipo_evento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tipo_evento.tx_tipo_evento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.equipe.tx_nome_equipe)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.equipe.tx_nome_equipe)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.dt_evento }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

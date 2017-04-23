@@ -99,6 +99,10 @@
       <End Role="hino" EntitySet="hino" />
       <End Role="evento_musica" EntitySet="evento_musica" />
     </AssociationSet>
+    <AssociationSet Name="equipe_evento" Association="worshipModel.equipe_evento">
+      <End Role="equipe" EntitySet="equipe" />
+      <End Role="evento" EntitySet="evento" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="hino_genero">
     <Key>
@@ -148,6 +152,7 @@
     <Property Name="cd_integrante_lider" Type="SByte" />
     <NavigationProperty Name="equipe_integrantes" Relationship="worshipModel.equipe_equipe_integrante" FromRole="equipe" ToRole="equipe_integrante" />
     <NavigationProperty Name="lider" Relationship="worshipModel.integrante_equipe" FromRole="equipe" ToRole="integrante" />
+    <NavigationProperty Name="eventos" Relationship="worshipModel.equipe_evento" FromRole="equipe" ToRole="evento" />
   </EntityType>
   <EntityType Name="equipe_integrante">
     <Key>
@@ -170,6 +175,7 @@
     <NavigationProperty Name="tipo_evento" Relationship="worshipModel.tipo_evento_evento" FromRole="evento" ToRole="tipo_evento" />
     <NavigationProperty Name="evento_musicas" Relationship="worshipModel.evento_evento_musica" FromRole="evento" ToRole="evento_musica" />
     <NavigationProperty Name="evento_integrantes" Relationship="worshipModel.evento_evento_integrante" FromRole="evento" ToRole="evento_integrante" />
+    <NavigationProperty Name="equipe" Relationship="worshipModel.equipe_evento" FromRole="evento" ToRole="equipe" />
   </EntityType>
   <EntityType Name="evento_integrante">
     <Key>
@@ -344,6 +350,18 @@
       </Principal>
       <Dependent Role="evento_musica">
         <PropertyRef Name="cd_hino" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="equipe_evento">
+    <End Type="worshipModel.equipe" Role="equipe" Multiplicity="0..1" />
+    <End Type="worshipModel.evento" Role="evento" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="equipe">
+        <PropertyRef Name="cd_equipe" />
+      </Principal>
+      <Dependent Role="evento">
+        <PropertyRef Name="cd_equipe" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -231,12 +231,15 @@
     <Compile Include="evento.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\eventosController.cs" />
     <Compile Include="evento_integrante.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\evento_integranteController.cs" />
     <Compile Include="evento_musica.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\evento_musicaController.cs" />
     <Compile Include="genero_letra.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
@@ -247,10 +250,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Controllers\integrantesController.cs" />
+    <Compile Include="Controllers\hinosController.cs" />
     <Compile Include="hino.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\hinosController.cs" />
     <Compile Include="hino_genero.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
@@ -292,6 +295,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-datepicker.css" />
+    <Content Include="Content\bootstrap-datepicker.min.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -314,6 +325,9 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.pt-BR.min.js" />
     <Content Include="worship.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>worship.edmx</DependentUpon>
@@ -324,6 +338,14 @@
       <DependentUpon>worship.edmx</DependentUpon>
       <LastGenOutput>worship.cs</LastGenOutput>
     </Content>
+    <Content Include="Content\bootstrap-datepicker.css.map" />
+    <Content Include="Content\bootstrap-datepicker.min.css.map" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
+    <Content Include="Content\bootstrap-datepicker.standalone.min.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.min.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.min.css.map" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -416,6 +438,23 @@
     <Content Include="Views\hino_genero\Details.cshtml" />
     <Content Include="Views\hino_genero\Edit.cshtml" />
     <Content Include="Views\hino_genero\Index.cshtml" />
+    <Content Include="Views\eventos\Create.cshtml" />
+    <Content Include="Views\eventos\Delete.cshtml" />
+    <Content Include="Views\eventos\Details.cshtml" />
+    <Content Include="Views\eventos\Edit.cshtml" />
+    <Content Include="Views\eventos\Index.cshtml" />
+    <Content Include="Views\evento_musica\Create.cshtml" />
+    <Content Include="Views\evento_musica\Delete.cshtml" />
+    <Content Include="Views\evento_musica\Details.cshtml" />
+    <Content Include="Views\evento_musica\Edit.cshtml" />
+    <Content Include="Views\evento_musica\Index.cshtml" />
+    <Content Include="Views\evento_integrante\Create.cshtml" />
+    <Content Include="Views\evento_integrante\Delete.cshtml" />
+    <Content Include="Views\evento_integrante\Details.cshtml" />
+    <Content Include="Views\evento_integrante\Edit.cshtml" />
+    <Content Include="Views\evento_integrante\Index.cshtml" />
+    <Content Include="Views\eventos\_EventoMusicasEdit.cshtml" />
+    <Content Include="Views\eventos\_EventoIntegrantesEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

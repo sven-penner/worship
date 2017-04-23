@@ -1,0 +1,88 @@
+﻿@model Worship.evento
+
+@{
+    ViewBag.Title = "Histórico";
+}
+
+
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.pt-BR.min.js"></script>
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+
+<h2>Registro de músicas</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div id="datepicker">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.dt_evento, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-6">
+                        @Html.EditorFor(model => model.dt_evento, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.dt_evento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cd_tipo_evento, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("cd_tipo_evento", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.cd_tipo_evento, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cd_equipe, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-6">
+                        @Html.DropDownList("cd_equipe", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.cd_equipe, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.tx_comentarios, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-6">
+                        @Html.TextAreaFor(model => model.tx_comentarios, 3, 40, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.tx_comentarios, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Salvar" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datepicker').datepicker({
+            maxViewMode: 2,
+            format: "dd/mm/yyyy",
+            todayBtn: true,
+            language: "pt-BR",
+            keyboardNavigation: false,
+            daysOfWeekHighlighted: "0,6",
+            todayHighlight: true
+        });
+        $('#datepicker').on('changeDate', function () {
+            var selDate = $('#datepicker').datepicker('getFormattedDate');
+            $('#dt_evento').val(selDate.substring(String(selDate).length - 4, String(selDate).length) + '-' + selDate.substring(3, 5) + '-' + selDate.substring(0, 2));
+        });
+    });
+</script>

@@ -28,7 +28,7 @@ namespace Worship
         [Column(Order = 2)]
         [Display(Name = "Tipo")]
         public string id_genero { get; set; }
-    
+
         public virtual genero_musica genero_musica { get; set; }
         public virtual genero_letra genero_letra { get; set; }
         public virtual hino hino { get; set; }

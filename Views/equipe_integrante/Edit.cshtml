@@ -12,6 +12,9 @@
             @Html.DisplayNameFor(model => model.tx_nome_equipe)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.cd_tipo_evento)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.nr_ano)
         </th>
         <th>
@@ -22,6 +25,9 @@
     <tr>
         <td>
             @Html.DisplayFor(model => model.tx_nome_equipe)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.tipo_evento.tx_tipo_evento)
         </td>
         <td>
             @Html.DisplayFor(model => model.nr_ano)
@@ -71,7 +77,7 @@
 <br /><br />
 
 @Html.HiddenFor(model => model.cd_equipe)
-@Html.Partial("_IntegrantesEquipeEdit", Model.equipe_integrantes)
+@Html.Partial("_IntegrantesEquipeEdit", Model.equipe_integrantes.OrderBy(ei => ei.integrante.tx_nome_integrante).ToList())
 <br /><br />
 @Html.ActionLink("Voltar", "Index", "equipes")
 

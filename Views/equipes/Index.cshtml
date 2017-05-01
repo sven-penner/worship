@@ -17,6 +17,9 @@
             @Html.DisplayNameFor(model => model.tx_nome_equipe)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.cd_tipo_evento)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.nr_ano)
         </th>
         <th>
@@ -33,6 +36,9 @@
         <tr>
             <td>
                 @Html.ActionLink(@Html.Raw(item.tx_nome_equipe).ToString(), "Edit", new { id = item.cd_equipe })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tipo_evento.tx_tipo_evento)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.nr_ano)
@@ -73,7 +79,7 @@
         </tr>
         if (item.nrIntegrantes > 0)
         {
-            @Html.Partial("_IntegrantesEquipe", item.equipe_integrantes)
+            @Html.Partial("_IntegrantesEquipe", item.equipe_integrantes.OrderBy(ei => ei.integrante.tx_nome_curto_integrante).ToList())
         }
         else
         {

@@ -21,7 +21,7 @@ namespace Worship
         }
 
         // GET: evento_integrante/Details/5
-        public ActionResult Details(DateTime id)
+        public ActionResult Details(short? id)
         {
             if (id == null)
             {
@@ -38,7 +38,7 @@ namespace Worship
         // GET: evento_integrante/Create
         public ActionResult Create()
         {
-            ViewBag.dt_evento = new SelectList(db.evento, "dt_evento", "tx_comentarios");
+            ViewBag.cd_evento = new SelectList(db.evento, "cd_evento", "tx_comentarios");
             ViewBag.cd_integrante = new SelectList(db.integrante, "cd_integrante", "tx_nome_integrante");
             return View();
         }
@@ -48,22 +48,21 @@ namespace Worship
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dt_evento,cd_integrante")] evento_integrante evento_integrante)
+        public ActionResult Create([Bind(Include = "cd_evento,cd_integrante")] evento_integrante evento_integrante)
         {
             if (ModelState.IsValid)
             {
-                db.evento_integrante.Add(evento_integrante);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (!db.evento_integrante.Any(ei => ei.cd_evento == evento_integrante.cd_evento && ei.cd_integrante == evento_integrante.cd_integrante))
+                {
+                    db.evento_integrante.Add(evento_integrante);
+                    db.SaveChanges();
+                }
             }
-
-            ViewBag.dt_evento = new SelectList(db.evento, "dt_evento", "tx_comentarios", evento_integrante.dt_evento);
-            ViewBag.cd_integrante = new SelectList(db.integrante, "cd_integrante", "tx_nome_integrante", evento_integrante.cd_integrante);
-            return View(evento_integrante);
+            return Json(Url.Action("Edit", "eventos", new { id = evento_integrante.cd_evento }));
         }
 
         // GET: evento_integrante/Edit/5
-        public ActionResult Edit(DateTime id)
+        public ActionResult Edit(short? id)
         {
             if (id == null)
             {
@@ -74,7 +73,7 @@ namespace Worship
             {
                 return HttpNotFound();
             }
-            ViewBag.dt_evento = new SelectList(db.evento, "dt_evento", "tx_comentarios", evento_integrante.dt_evento);
+            ViewBag.cd_evento = new SelectList(db.evento, "cd_evento", "tx_comentarios", evento_integrante.cd_evento);
             ViewBag.cd_integrante = new SelectList(db.integrante, "cd_integrante", "tx_nome_integrante", evento_integrante.cd_integrante);
             return View(evento_integrante);
         }
@@ -84,7 +83,7 @@ namespace Worship
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dt_evento,cd_integrante")] evento_integrante evento_integrante)
+        public ActionResult Edit([Bind(Include = "cd_evento,cd_integrante")] evento_integrante evento_integrante)
         {
             if (ModelState.IsValid)
             {
@@ -92,13 +91,13 @@ namespace Worship
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.dt_evento = new SelectList(db.evento, "dt_evento", "tx_comentarios", evento_integrante.dt_evento);
+            ViewBag.cd_evento = new SelectList(db.evento, "cd_evento", "tx_comentarios", evento_integrante.cd_evento);
             ViewBag.cd_integrante = new SelectList(db.integrante, "cd_integrante", "tx_nome_integrante", evento_integrante.cd_integrante);
             return View(evento_integrante);
         }
 
         // GET: evento_integrante/Delete/5
-        public ActionResult Delete(DateTime id)
+        public ActionResult Delete(short? id)
         {
             if (id == null)
             {
@@ -115,12 +114,12 @@ namespace Worship
         // POST: evento_integrante/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(DateTime id)
+        public ActionResult DeleteConfirmed([Bind(Include = "cd_evento,cd_integrante")] evento_integrante evento_integrante)
         {
-            evento_integrante evento_integrante = db.evento_integrante.Find(id);
-            db.evento_integrante.Remove(evento_integrante);
+            evento_integrante ei = db.evento_integrante.Find(Convert.ToSByte(evento_integrante.cd_integrante), Convert.ToInt16(evento_integrante.cd_evento));
+            db.evento_integrante.Remove(ei);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(Url.Action("Edit", "eventos", new { id = evento_integrante.cd_evento }));
         }
 
         protected override void Dispose(bool disposing)

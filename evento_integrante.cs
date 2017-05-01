@@ -18,8 +18,8 @@ namespace Worship
     {
         [Key]
         [Column(Order = 0)]
-        [Display(Name = "Data do evento")]
-        public System.DateTime dt_evento { get; set; }
+        [Display(Name = "Código do evento")]
+        public short cd_evento { get; set; }
         [Key]
         [Column(Order = 1)]
         [Display(Name = "Integrante")]

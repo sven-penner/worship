@@ -222,6 +222,9 @@
     <Compile Include="Controllers\genero_musicaController.cs" />
     <Compile Include="Controllers\equipesController.cs" />
     <Compile Include="Controllers\equipe_integranteController.cs" />
+    <Compile Include="Controllers\eventosController.cs" />
+    <Compile Include="Controllers\evento_integranteController.cs" />
+    <Compile Include="Controllers\evento_musicaController.cs" />
     <Compile Include="equipe.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
@@ -231,15 +234,12 @@
     <Compile Include="evento.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\eventosController.cs" />
     <Compile Include="evento_integrante.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\evento_integranteController.cs" />
     <Compile Include="evento_musica.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\evento_musicaController.cs" />
     <Compile Include="genero_letra.cs">
       <DependentUpon>worship.tt</DependentUpon>
     </Compile>
@@ -308,6 +308,9 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\INAlogo.png" />
+    <Content Include="Content\images\noprofile-64x64.png" />
+    <Content Include="Content\images\noprofile-big.png" />
+    <Content Include="Content\images\sven-64x64.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

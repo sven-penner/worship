@@ -51,6 +51,7 @@
     <EntitySetMapping Name="equipe">
       <EntityTypeMapping TypeName="worshipModel.equipe">
         <MappingFragment StoreEntitySet="equipe">
+          <ScalarProperty Name="cd_tipo_evento" ColumnName="cd_tipo_evento" />
           <ScalarProperty Name="cd_integrante_lider" ColumnName="cd_integrante_lider" />
           <ScalarProperty Name="nr_domingo" ColumnName="nr_domingo" />
           <ScalarProperty Name="nr_ano" ColumnName="nr_ano" />
@@ -70,6 +71,7 @@
     <EntitySetMapping Name="evento">
       <EntityTypeMapping TypeName="worshipModel.evento">
         <MappingFragment StoreEntitySet="evento">
+          <ScalarProperty Name="cd_evento" ColumnName="cd_evento" />
           <ScalarProperty Name="cd_tipo_evento" ColumnName="cd_tipo_evento" />
           <ScalarProperty Name="tx_comentarios" ColumnName="tx_comentarios" />
           <ScalarProperty Name="cd_equipe" ColumnName="cd_equipe" />
@@ -80,17 +82,17 @@
     <EntitySetMapping Name="evento_integrante">
       <EntityTypeMapping TypeName="worshipModel.evento_integrante">
         <MappingFragment StoreEntitySet="evento_integrante">
+          <ScalarProperty Name="cd_evento" ColumnName="cd_evento" />
           <ScalarProperty Name="cd_integrante" ColumnName="cd_integrante" />
-          <ScalarProperty Name="dt_evento" ColumnName="dt_evento" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="evento_musica">
       <EntityTypeMapping TypeName="worshipModel.evento_musica">
         <MappingFragment StoreEntitySet="evento_musica">
+          <ScalarProperty Name="cd_evento" ColumnName="cd_evento" />
           <ScalarProperty Name="nr_sequencia" ColumnName="nr_sequencia" />
           <ScalarProperty Name="cd_hino" ColumnName="cd_hino" />
-          <ScalarProperty Name="dt_evento" ColumnName="dt_evento" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -23,6 +23,7 @@ namespace Worship
         }
 
         [Key]
+        public short cd_evento { get; set; }
         [Required(ErrorMessage = "Informe a data do evento")]
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]

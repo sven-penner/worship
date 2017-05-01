@@ -25,6 +25,14 @@
         </div>
 
         <div class="form-group">
+            @Html.LabelFor(model => model.cd_tipo_evento, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DisplayFor(model => model.tipo_evento.tx_tipo_evento)
+                @Html.HiddenFor(model => model.cd_tipo_evento)
+            </div>
+        </div>
+
+        <div class="form-group">
             @Html.LabelFor(model => model.nr_ano, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DisplayFor(model => model.nr_ano)
@@ -52,7 +60,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.cd_integrante_lider, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.cd_integrante_lider, new SelectList(@ViewBag.ddList, "Value", "Text"), new { @class = "form-control" })
+                @Html.DropDownListFor(model => model.cd_integrante_lider, new SelectList(@ViewBag.ddIntegrantes, "Value", "Text"), new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.cd_integrante_lider, "", new { @class = "text-danger" })
             </div>
         </div>

@@ -6,16 +6,33 @@
 
 @{
     @Html.Raw("<br/><ul class='list-group'>")
-    foreach (var item in Model)
+    var count = 1;
+    var number = Model.Count();
+    foreach (var item in Model.OrderBy(m => m.nr_sequencia))
     {
         @Html.Raw("<li class='list-group-item'>")
         @Html.DisplayFor(modelItem => item.hino.tx_titulo_hino)
-        
-        <a href="#" id="M_@Html.Raw(item.cd_hino)" class="Excluir" style="float:right;" value="@Html.Raw(item.cd_hino)">
+
+        <a href="#" id="@Html.Raw(item.cd_hino)" class="ExcluirMusica" style="float:right;" value="@Html.Raw(item.cd_hino)">
             <i class="glyphicon glyphicon-trash" title="Excluir música"></i>
             <span class="sr-only">Excluir</span>
         </a>
+        if (count != number)
+        {
+            <a href="#" id="D_@Html.Raw(item.cd_hino)" class="down" style="float:right;" value="@Html.Raw(item.cd_hino)">
+                <i class="glyphicon glyphicon-arrow-down"></i>
+                <span class="sr-only">Excluir</span>
+            </a>
+        }
+        if (count != 1)
+        {
+            <a href="#" id="U_@Html.Raw(item.cd_hino)" class="up" style="float:right;" value="@Html.Raw(item.cd_hino)">
+                <i class="glyphicon glyphicon-arrow-up"></i>
+                <span class="sr-only">Excluir</span>
+            </a>
+        }
         @Html.Raw("</li>")
+        count++;
     }
     @Html.Raw("</ul>")
 }

@@ -11,38 +11,29 @@
         @Html.ActionLink("Criar novo", "Create", null, new { @style = "color:white;" })
     </button>
 </p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.tx_nome_integrante)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tx_email_integrante)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.tx_nome_curto_integrante)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(@Html.Raw(item.tx_nome_integrante).ToString(), "Edit", new { id = item.cd_integrante })
-        </td>
-        <td>
+@foreach (var item in Model)
+{
+    <div class="media">
+        <div class="media-left">
+            @if (item.cd_integrante == 1)
+            {
+                @Html.Raw("<img src='/Content/images/sven-64x64.png' />");
+            }
+            else
+            {
+                @Html.Raw("<img src='/Content/images/noprofile-64x64.png' />");
+            }
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">@Html.ActionLink(@Html.Raw(item.tx_nome_integrante).ToString(), "Edit", new { id = item.cd_integrante }) (@Html.DisplayFor(modelItem => item.tx_nome_curto_integrante))</h4>
             @Html.DisplayFor(modelItem => item.tx_email_integrante)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tx_nome_curto_integrante)
-        </td>
-        <td>
-            <a href="@Url.Action("Delete", new { id = item.cd_integrante })">
-                <i class="glyphicon glyphicon-trash"></i>
-                <span class="sr-only">Excluir</span>
-            </a>
-        </td>
-    </tr>
+            <div style="float: right;">
+                <a href="@Url.Action("Delete", new { id = item.cd_integrante })">
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span class="sr-only">Excluir</span>
+                </a>
+            </div>
+        </div>
+    </div>
 }
-
-</table>

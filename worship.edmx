@@ -11,6 +11,7 @@
           </Key>
           <Property Name="cd_equipe" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tx_nome_equipe" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="cd_tipo_evento" Type="tinyint" Nullable="false" />
           <Property Name="nr_ano" Type="smallint" Nullable="false" />
           <Property Name="nr_domingo" Type="tinyint" />
           <Property Name="cd_integrante_lider" Type="tinyint" />
@@ -25,8 +26,9 @@
         </EntityType>
         <EntityType Name="evento">
           <Key>
-            <PropertyRef Name="dt_evento" />
+            <PropertyRef Name="cd_evento" />
           </Key>
+          <Property Name="cd_evento" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="dt_evento" Type="date" Nullable="false" />
           <Property Name="cd_tipo_evento" Type="tinyint" Nullable="false" />
           <Property Name="cd_equipe" Type="tinyint" />
@@ -34,18 +36,18 @@
         </EntityType>
         <EntityType Name="evento_integrante">
           <Key>
-            <PropertyRef Name="dt_evento" />
+            <PropertyRef Name="cd_evento" />
             <PropertyRef Name="cd_integrante" />
           </Key>
-          <Property Name="dt_evento" Type="date" Nullable="false" />
+          <Property Name="cd_evento" Type="smallint" Nullable="false" />
           <Property Name="cd_integrante" Type="tinyint" Nullable="false" />
         </EntityType>
         <EntityType Name="evento_musica">
           <Key>
-            <PropertyRef Name="dt_evento" />
+            <PropertyRef Name="cd_evento" />
             <PropertyRef Name="cd_hino" />
           </Key>
-          <Property Name="dt_evento" Type="date" Nullable="false" />
+          <Property Name="cd_evento" Type="smallint" Nullable="false" />
           <Property Name="cd_hino" Type="usmallint" Nullable="false" />
           <Property Name="nr_sequencia" Type="tinyint" />
         </EntityType>
@@ -67,7 +69,7 @@
           <Key>
             <PropertyRef Name="cd_hino" />
           </Key>
-          <Property Name="cd_hino" Type="smallint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="cd_hino" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tx_titulo_hino" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="tx_inicio" Type="varchar" MaxLength="50" />
           <Property Name="tx_nome_compositor_letra" Type="varchar" MaxLength="50" />
@@ -243,6 +245,10 @@
             <End Role="equipe" EntitySet="equipe" />
             <End Role="evento" EntitySet="evento" />
           </AssociationSet>
+          <AssociationSet Name="tipo_evento_equipe" Association="worshipModel.tipo_evento_equipe">
+            <End Role="tipo_evento" EntitySet="tipo_evento" />
+            <End Role="equipe" EntitySet="equipe" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="hino_genero">
           <Key>
@@ -287,12 +293,14 @@
           </Key>
           <Property Name="cd_equipe" Type="SByte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tx_nome_equipe" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="cd_tipo_evento" Type="SByte" Nullable="false" />
           <Property Name="nr_ano" Type="Int16" Nullable="false" />
           <Property Name="nr_domingo" Type="SByte" />
           <Property Name="cd_integrante_lider" Type="SByte" />
           <NavigationProperty Name="equipe_integrantes" Relationship="worshipModel.equipe_equipe_integrante" FromRole="equipe" ToRole="equipe_integrante" />
           <NavigationProperty Name="lider" Relationship="worshipModel.integrante_equipe" FromRole="equipe" ToRole="integrante" />
           <NavigationProperty Name="eventos" Relationship="worshipModel.equipe_evento" FromRole="equipe" ToRole="evento" />
+          <NavigationProperty Name="tipo_evento" Relationship="worshipModel.tipo_evento_equipe" FromRole="equipe" ToRole="tipo_evento" />
         </EntityType>
         <EntityType Name="equipe_integrante">
           <Key>
@@ -306,8 +314,9 @@
         </EntityType>
         <EntityType Name="evento">
           <Key>
-            <PropertyRef Name="dt_evento" />
+            <PropertyRef Name="cd_evento" />
           </Key>
+          <Property Name="cd_evento" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Name="dt_evento" Type="DateTime" Nullable="false" />
           <Property Name="cd_tipo_evento" Type="SByte" Nullable="false" />
           <Property Name="cd_equipe" Type="SByte" />
@@ -319,20 +328,20 @@
         </EntityType>
         <EntityType Name="evento_integrante">
           <Key>
-            <PropertyRef Name="dt_evento" />
             <PropertyRef Name="cd_integrante" />
+            <PropertyRef Name="cd_evento" />
           </Key>
-          <Property Name="dt_evento" Type="DateTime" Nullable="false" />
+          <Property Name="cd_evento" Type="Int16" Nullable="false" />
           <Property Name="cd_integrante" Type="SByte" Nullable="false" />
           <NavigationProperty Name="evento" Relationship="worshipModel.evento_evento_integrante" FromRole="evento_integrante" ToRole="evento" />
           <NavigationProperty Name="integrante" Relationship="worshipModel.integrante_evento_integrante" FromRole="evento_integrante" ToRole="integrante" />
         </EntityType>
         <EntityType Name="evento_musica">
           <Key>
-            <PropertyRef Name="dt_evento" />
             <PropertyRef Name="cd_hino" />
+            <PropertyRef Name="cd_evento" />
           </Key>
-          <Property Name="dt_evento" Type="DateTime" Nullable="false" />
+          <Property Name="cd_evento" Type="Int16" Nullable="false" />
           <Property Name="cd_hino" Type="Int16" Nullable="false" />
           <Property Name="nr_sequencia" Type="SByte" />
           <NavigationProperty Name="evento" Relationship="worshipModel.evento_evento_musica" FromRole="evento_musica" ToRole="evento" />
@@ -357,6 +366,7 @@
           <Property Name="cd_tipo_evento" Type="SByte" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" />
           <Property Name="tx_tipo_evento" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="eventos" Relationship="worshipModel.tipo_evento_evento" FromRole="tipo_evento" ToRole="evento" />
+          <NavigationProperty Name="equipes" Relationship="worshipModel.tipo_evento_equipe" FromRole="tipo_evento" ToRole="equipe" />
         </EntityType>
         <Association Name="tipo_evento_evento">
           <End Type="worshipModel.tipo_evento" Role="tipo_evento" Multiplicity="1" />
@@ -399,10 +409,10 @@
           <End Type="worshipModel.evento_musica" Role="evento_musica" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento">
-              <PropertyRef Name="dt_evento" />
+              <PropertyRef Name="cd_evento" />
             </Principal>
             <Dependent Role="evento_musica">
-              <PropertyRef Name="dt_evento" />
+              <PropertyRef Name="cd_evento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -411,10 +421,10 @@
           <End Type="worshipModel.evento_integrante" Role="evento_integrante" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="evento">
-              <PropertyRef Name="dt_evento" />
+              <PropertyRef Name="cd_evento" />
             </Principal>
             <Dependent Role="evento_integrante">
-              <PropertyRef Name="dt_evento" />
+              <PropertyRef Name="cd_evento" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -505,6 +515,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="tipo_evento_equipe">
+          <End Type="worshipModel.tipo_evento" Role="tipo_evento" Multiplicity="1" />
+          <End Type="worshipModel.equipe" Role="equipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_evento">
+              <PropertyRef Name="cd_tipo_evento" />
+            </Principal>
+            <Dependent Role="equipe">
+              <PropertyRef Name="cd_tipo_evento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -561,6 +583,7 @@
           <EntitySetMapping Name="equipe">
             <EntityTypeMapping TypeName="worshipModel.equipe">
               <MappingFragment StoreEntitySet="equipe">
+                <ScalarProperty Name="cd_tipo_evento" ColumnName="cd_tipo_evento" />
                 <ScalarProperty Name="cd_integrante_lider" ColumnName="cd_integrante_lider" />
                 <ScalarProperty Name="nr_domingo" ColumnName="nr_domingo" />
                 <ScalarProperty Name="nr_ano" ColumnName="nr_ano" />
@@ -580,6 +603,7 @@
           <EntitySetMapping Name="evento">
             <EntityTypeMapping TypeName="worshipModel.evento">
               <MappingFragment StoreEntitySet="evento">
+                <ScalarProperty Name="cd_evento" ColumnName="cd_evento" />
                 <ScalarProperty Name="cd_tipo_evento" ColumnName="cd_tipo_evento" />
                 <ScalarProperty Name="tx_comentarios" ColumnName="tx_comentarios" />
                 <ScalarProperty Name="cd_equipe" ColumnName="cd_equipe" />
@@ -590,17 +614,17 @@
           <EntitySetMapping Name="evento_integrante">
             <EntityTypeMapping TypeName="worshipModel.evento_integrante">
               <MappingFragment StoreEntitySet="evento_integrante">
+                <ScalarProperty Name="cd_evento" ColumnName="cd_evento" />
                 <ScalarProperty Name="cd_integrante" ColumnName="cd_integrante" />
-                <ScalarProperty Name="dt_evento" ColumnName="dt_evento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="evento_musica">
             <EntityTypeMapping TypeName="worshipModel.evento_musica">
               <MappingFragment StoreEntitySet="evento_musica">
+                <ScalarProperty Name="cd_evento" ColumnName="cd_evento" />
                 <ScalarProperty Name="nr_sequencia" ColumnName="nr_sequencia" />
                 <ScalarProperty Name="cd_hino" ColumnName="cd_hino" />
-                <ScalarProperty Name="dt_evento" ColumnName="dt_evento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

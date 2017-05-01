@@ -21,7 +21,7 @@ namespace Worship
         }
 
         // GET: evento_musica/Details/5
-        public ActionResult Details(DateTime id)
+        public ActionResult Details(short? id)
         {
             if (id == null)
             {
@@ -38,7 +38,7 @@ namespace Worship
         // GET: evento_musica/Create
         public ActionResult Create()
         {
-            ViewBag.dt_evento = new SelectList(db.evento, "dt_evento", "tx_comentarios");
+            ViewBag.cd_evento = new SelectList(db.evento, "cd_evento", "tx_comentarios");
             ViewBag.cd_hino = new SelectList(db.hino, "cd_hino", "tx_titulo_hino");
             return View();
         }
@@ -48,22 +48,30 @@ namespace Worship
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "dt_evento,cd_hino,nr_sequencia")] evento_musica evento_musica)
+        public ActionResult Create([Bind(Include = "cd_evento,cd_hino,nr_sequencia")] evento_musica evento_musica)
         {
             if (ModelState.IsValid)
             {
-                db.evento_musica.Add(evento_musica);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (!db.evento_musica.Any(em => em.cd_evento == evento_musica.cd_evento && em.cd_hino == evento_musica.cd_hino))
+                {
+                    var maxSequencia = db.evento_musica.Where(em => em.cd_evento == evento_musica.cd_evento).Max(em => em.nr_sequencia);
+                    if (maxSequencia == null)
+                    {
+                        maxSequencia = 1;
+                    } else
+                    {
+                        maxSequencia += 1;
+                    }
+                    evento_musica.nr_sequencia = maxSequencia;
+                    db.evento_musica.Add(evento_musica);
+                    db.SaveChanges();
+                }
             }
-
-            ViewBag.dt_evento = new SelectList(db.evento, "dt_evento", "tx_comentarios", evento_musica.dt_evento);
-            ViewBag.cd_hino = new SelectList(db.hino, "cd_hino", "tx_titulo_hino", evento_musica.cd_hino);
-            return View(evento_musica);
+            return Json(Url.Action("Edit", "eventos", new { id = evento_musica.cd_evento }));
         }
 
         // GET: evento_musica/Edit/5
-        public ActionResult Edit(DateTime id)
+        public ActionResult Edit(short? id)
         {
             if (id == null)
             {
@@ -74,7 +82,7 @@ namespace Worship
             {
                 return HttpNotFound();
             }
-            ViewBag.dt_evento = new SelectList(db.evento, "dt_evento", "tx_comentarios", evento_musica.dt_evento);
+            ViewBag.cd_evento = new SelectList(db.evento, "cd_evento", "tx_comentarios", evento_musica.cd_evento);
             ViewBag.cd_hino = new SelectList(db.hino, "cd_hino", "tx_titulo_hino", evento_musica.cd_hino);
             return View(evento_musica);
         }
@@ -84,7 +92,7 @@ namespace Worship
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "dt_evento,cd_hino,nr_sequencia")] evento_musica evento_musica)
+        public ActionResult Edit([Bind(Include = "cd_evento,cd_hino,nr_sequencia")] evento_musica evento_musica)
         {
             if (ModelState.IsValid)
             {
@@ -92,13 +100,13 @@ namespace Worship
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.dt_evento = new SelectList(db.evento, "dt_evento", "tx_comentarios", evento_musica.dt_evento);
+            ViewBag.cd_evento = new SelectList(db.evento, "cd_evento", "tx_comentarios", evento_musica.cd_evento);
             ViewBag.cd_hino = new SelectList(db.hino, "cd_hino", "tx_titulo_hino", evento_musica.cd_hino);
             return View(evento_musica);
         }
 
         // GET: evento_musica/Delete/5
-        public ActionResult Delete(DateTime id)
+        public ActionResult Delete(short? id)
         {
             if (id == null)
             {
@@ -115,12 +123,12 @@ namespace Worship
         // POST: evento_musica/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(DateTime id)
+        public ActionResult DeleteConfirmed([Bind(Include = "cd_evento,cd_hino")] evento_musica evento_musica)
         {
-            evento_musica evento_musica = db.evento_musica.Find(id);
-            db.evento_musica.Remove(evento_musica);
+            evento_musica em = db.evento_musica.Find(evento_musica.cd_hino, evento_musica.cd_evento);
+            db.evento_musica.Remove(em);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(Url.Action("Edit", "eventos", new { id = evento_musica.cd_evento }));
         }
 
         protected override void Dispose(bool disposing)

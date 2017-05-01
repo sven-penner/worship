@@ -1,18 +1,32 @@
 ﻿@model IEnumerable<Worship.evento>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Lista de eventos";
 }
-
-<h2>Index</h2>
+<br/>
+<div class="row">
+    <div class="col-md-6">
+        <h2>Lista de eventos</h2>
+    </div>
+    <div class="col-md-6">
+        <button type="button" class="btn btn-default navbar-right active" aria-label="Lista" title="Lista">
+            <span class="glyphicon glyphicon-list" aria-hidden="false"></span>
+        </button>
+        <a href="@Url.Action("EditLastEvent", "eventos")" class="btn btn-default navbar-right" title="Calendário">
+            <i class="glyphicon glyphicon-calendar"></i>
+        </a>
+    </div>
+</div>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="@Url.Action("Create", "eventos")" class="btn btn-white btn-primary">
+        <i class="glyphicon glyphicon-plus" title="Registrar novo evento"></i> Novo evento
+    </a>
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.tx_comentarios)
+            @Html.DisplayNameFor(model => model.dt_evento)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.tipo_evento.tx_tipo_evento)
@@ -20,13 +34,16 @@
         <th>
             @Html.DisplayNameFor(model => model.equipe.tx_nome_equipe)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tx_comentarios)
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.OrderByDescending(i => i.dt_evento)) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.tx_comentarios)
+            @Html.ActionLink(@Html.DisplayFor(modelItem => item.dt_evento).ToString(), "Edit", new { id = item.cd_evento })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.tipo_evento.tx_tipo_evento)
@@ -35,9 +52,13 @@
             @Html.DisplayFor(modelItem => item.equipe.tx_nome_equipe)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.dt_evento }) |
-            @Html.ActionLink("Details", "Details", new { id=item.dt_evento }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.dt_evento })
+            @Html.DisplayFor(modelItem => item.tx_comentarios)
+        </td>
+        <td>
+            <a href="@Url.Action("Delete", new { id = item.cd_evento })">
+                <i class="glyphicon glyphicon-trash"></i>
+                <span class="sr-only">Excluir</span>
+            </a>
         </td>
     </tr>
 }

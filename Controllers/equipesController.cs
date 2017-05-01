@@ -43,17 +43,13 @@ namespace Worship
         // GET: equipes/Create
         public ActionResult Create()
         {
-            // Add the values to be used in the dropdown list
-            var selectListItems = db.integrante.OrderBy(i => i.tx_nome_integrante).ToList().
-                Select(i => new SelectListItem
-                {
-                    Text = i.tx_nome_integrante,
-                    Value = i.cd_integrante.ToString()
-                });
+            // Lista de integrantes
+            var selectListItems = new SelectList(db.integrante.OrderBy(i => i.tx_nome_integrante).ToList(), "cd_integrante", "tx_nome_integrante");
+            ViewBag.ddIntegrantes = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
+            // Lista de tipos de eventos
+            selectListItems = new SelectList(db.tipo_evento.OrderBy(te => te.tx_tipo_evento).ToList(), "cd_tipo_evento", "tx_tipo_evento");
+            ViewBag.ddTiposEvento = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
 
-            // Concatenating with our DefaultItem so we have that classic "- SELECT -"
-            var ddList = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
-            ViewBag.ddList = ddList;
             return View();
         }
 
@@ -62,12 +58,12 @@ namespace Worship
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cd_equipe,tx_nome_equipe,nr_ano,nr_domingo,cd_integrante_lider")] equipe equipe)
+        public ActionResult Create([Bind(Include = "cd_equipe,tx_nome_equipe,cd_tipo_evento,nr_ano,nr_domingo,cd_integrante_lider")] equipe equipe)
         {
             if (ModelState.IsValid)
             {
-                if (db.equipe.Any(e => e.tx_nome_equipe == equipe.tx_nome_equipe && e.nr_ano == equipe.nr_ano))
-                    ModelState.AddModelError("equipeJaExiste", "Equipe já existe para o ano indicado");
+                if (db.equipe.Any(e => e.tx_nome_equipe == equipe.tx_nome_equipe && e.cd_tipo_evento == equipe.cd_tipo_evento && e.nr_ano == equipe.nr_ano))
+                    ModelState.AddModelError("equipeJaExiste", "Equipe já existe para o tipo de evento e ano indicados");
                 else
                 {
                     db.equipe.Add(equipe);
@@ -75,17 +71,14 @@ namespace Worship
                     return RedirectToAction("Index");
                 }
             }
-            // Add the values to be used in the dropdown list
-            var selectListItems = db.integrante.OrderBy(i => i.tx_nome_integrante).ToList().
-                Select(i => new SelectListItem
-                {
-                    Text = i.tx_nome_integrante,
-                    Value = i.cd_integrante.ToString()
-                });
 
-            // Concatenating with our DefaultItem so we have that classic "- SELECT -"
-            var ddList = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
-            ViewBag.ddList = ddList;
+            // Lista de integrantes
+            var selectListItems = new SelectList(db.integrante.OrderBy(i => i.tx_nome_integrante).ToList(), "cd_integrante", "tx_nome_integrante");
+            ViewBag.ddIntegrantes = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
+            // Lista de tipos de eventos
+            selectListItems = new SelectList(db.tipo_evento.OrderBy(te => te.tx_tipo_evento).ToList(), "cd_tipo_evento", "tx_tipo_evento");
+            ViewBag.ddTiposEvento = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
+
             return View(equipe);
         }
 
@@ -102,17 +95,9 @@ namespace Worship
                 return HttpNotFound();
             }
 
-            // Add the values to be used in the dropdown list
-            var selectListItems = db.integrante.OrderBy(i => i.tx_nome_integrante).ToList().
-                Select(i => new SelectListItem
-                {
-                    Text = i.tx_nome_integrante,
-                    Value = i.cd_integrante.ToString()
-                });
-
-            // Concatenating with our DefaultItem so we have that classic "- SELECT -"
-            var ddList = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
-            ViewBag.ddList = ddList;
+            // Lista de integrantes
+            var selectListItems = new SelectList(db.integrante.OrderBy(i => i.tx_nome_integrante).ToList(), "cd_integrante", "tx_nome_integrante");
+            ViewBag.ddIntegrantes = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
             return View(equipe);
         }
 
@@ -121,7 +106,7 @@ namespace Worship
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cd_equipe,tx_nome_equipe,nr_ano,nr_domingo,cd_integrante_lider")] equipe equipe)
+        public ActionResult Edit([Bind(Include = "cd_equipe,tx_nome_equipe,cd_tipo_evento,nr_ano,nr_domingo,cd_integrante_lider")] equipe equipe)
         {
             if (ModelState.IsValid)
             {
@@ -129,17 +114,9 @@ namespace Worship
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            // Add the values to be used in the dropdown list
-            var selectListItems = db.integrante.OrderBy(i => i.tx_nome_integrante).ToList().
-                Select(i => new SelectListItem
-                {
-                    Text = i.tx_nome_integrante,
-                    Value = i.cd_integrante.ToString()
-                });
-
-            // Concatenating with our DefaultItem so we have that classic "- SELECT -"
-            var ddList = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
-            ViewBag.ddList = ddList;
+            // Lista de integrantes
+            var selectListItems = new SelectList(db.integrante.OrderBy(i => i.tx_nome_integrante).ToList(), "cd_integrante", "tx_nome_integrante");
+            ViewBag.ddIntegrantes = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
             return View(equipe);
         }
 
@@ -177,28 +154,6 @@ namespace Worship
             }
             base.Dispose(disposing);
         }
-        //private integranteViewModel AllTypeItems(string[] selectedValues = null)
-        //{
-        //    var ddList = new integranteViewModel();
-
-        //    // Add the values to be used in the checkbox list
-        //    // The values can come from anywhere
-        //    var selectListItems = db.integrante.OrderBy(i => i.tx_nome_integrante).ToList().Select(i => new SelectListItem
-        //    {
-        //        Text = i.tx_nome_integrante,
-        //        Value = i.cd_integrante.ToString()
-        //    });
-
-        //    // Concatenating with our DefaultItem so we have that classic "- SELECT -"
-        //    ddList.SelectListItems = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
-
-        //    if (selectedValues != null)
-        //    {
-        //        ddList.SelectedValues = selectedValues;
-        //    }
-
-        //    return ddList;
-        //}
 
         public IEnumerable<SelectListItem> DefaultItem
         {
@@ -211,5 +166,12 @@ namespace Worship
                 }, count: 1);
             }
         }
+        [AcceptVerbs(HttpVerbs.Get)]
+        public ActionResult FiltraEquipes(sbyte cd_tipo_evento, short nr_ano)
+        {
+            var equipes = db.equipe.Where(e => e.cd_tipo_evento == cd_tipo_evento && e.nr_ano == nr_ano).ToList();
+            return Json(new SelectList(equipes.ToArray(), "cd_equipe", "tx_nome_equipe"), JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

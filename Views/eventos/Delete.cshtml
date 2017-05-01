@@ -1,28 +1,25 @@
 ﻿@model Worship.evento
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "Excluir evento";
 }
 
-<h2>Delete</h2>
+<h2>Excluir evento</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem certeza que deseja excluir este evento?</h3>
 <div>
-    <h4>evento</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.tx_comentarios)
+            @Html.DisplayNameFor(model => model.dt_evento)
         </dt>
-
         <dd>
-            @Html.DisplayFor(model => model.tx_comentarios)
+            @Html.DisplayFor(model => model.dt_evento)
         </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.tipo_evento.tx_tipo_evento)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.tipo_evento.tx_tipo_evento)
         </dd>
@@ -30,9 +27,15 @@
         <dt>
             @Html.DisplayNameFor(model => model.equipe.tx_nome_equipe)
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.equipe.tx_nome_equipe)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tx_comentarios)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.tx_comentarios)
         </dd>
 
     </dl>
@@ -41,8 +44,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Excluir" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar", "Index")
         </div>
     }
 </div>

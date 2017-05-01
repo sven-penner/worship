@@ -4,12 +4,23 @@
     ViewBag.Title = "Histórico";
 }
 
-
 <script src="~/Scripts/bootstrap-datepicker.js"></script>
 <script src="~/Scripts/bootstrap-datepicker.pt-BR.min.js"></script>
 <link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
-
-<h2>Registro de músicas</h2>
+<br />
+<div class="row">
+    <div class="col-md-6">
+        <h2>Registro de músicas</h2>
+    </div>
+    <div class="col-md-6">
+        <a href="@Url.Action("Index", "eventos")" class="btn btn-default navbar-right" title="Lista">
+            <i class="glyphicon glyphicon-list"></i>
+        </a>
+        <button type="button" class="btn btn-default navbar-right active" aria-label="Calendário" title="Calendário">
+            <span class="glyphicon glyphicon-calendar" aria-hidden="false"></span>
+        </button>
+    </div>
+</div>
 
 @using (Html.BeginForm())
 {
@@ -18,6 +29,10 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.cd_evento)
+        @Html.HiddenFor(model => model.dt_evento)
+        @Html.HiddenFor(model => model.cd_tipo_evento)
+
         <div class="row">
             <div class="col-md-3">
                 <div class="form-group">
@@ -30,21 +45,21 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.dt_evento, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-6">
-                        @Html.EditorFor(model => model.dt_evento, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.DisplayFor(model => model.dt_evento)
                         @Html.ValidationMessageFor(model => model.dt_evento, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.cd_tipo_evento, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-6">
-                        @Html.DropDownList("cd_tipo_evento", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.DisplayFor(model => model.tipo_evento.tx_tipo_evento)
                         @Html.ValidationMessageFor(model => model.cd_tipo_evento, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.cd_equipe, htmlAttributes: new { @class = "control-label col-md-3" })
                     <div class="col-md-6">
-                        @Html.DropDownList("cd_equipe", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.cd_equipe, new SelectList(@ViewBag.ddEquipes, "Value", "Text"), new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.cd_equipe, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -55,53 +70,67 @@
                         @Html.ValidationMessageFor(model => model.tx_comentarios, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Salvar" class="btn btn-default" />
-                    </div>
+                <div class="btn-group">
+                    <button type="submit" value="Salvar" class="btn btn-primary">Salvar</button>
+                    @if (ViewBag.eventoAnterior != null)
+                    {
+                        <a href="@Url.Action("Edit/"+ @ViewBag.eventoAnterior, "eventos")" class="btn btn-white btn-primary">
+                            <i class="glyphicon glyphicon-chevron-left" title="Evento anterior"></i> Anterior
+                        </a>
+                    }
+                    @if (ViewBag.proxEvento != null)
+                    {
+                        <a href="@Url.Action("Edit/"+ @ViewBag.proxEvento, "eventos")" class="btn btn-white btn-primary">
+                            Próximo <i class="glyphicon glyphicon-chevron-right" title="Próximo evento"></i>
+                        </a>
+                    }
+                    <a href="@Url.Action("Create", "eventos")" class="btn btn-white btn-primary">
+                        <i class="glyphicon glyphicon-plus" title="Registrar novo evento"></i> Novo evento
+                    </a>
+                    <a href="@Url.Action("Delete/" + Model.cd_evento, "eventos")" class="btn btn-white btn-primary">
+                        <i class="glyphicon glyphicon-trash" title="Excluir evento"></i> Excluir evento
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 }
+    <div class="form-horizontal">
+        <hr />
 
-<div class="form-horizontal">
-    <hr />
-
-    <div class="row">
-        @using (Html.BeginForm("Create", "evento_musica"))
+        <div class="row">
+            @using (Html.BeginForm("Create", "evento_musica"))
             {
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.dt_evento)
-            <div class="col-md-6">
-                <div class="form-inline">
-                    @Html.LabelFor(model => model.evento_musicas.FirstOrDefault().cd_hino, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.DropDownList("cd_hino", null, htmlAttributes: new { @class = "form-control" })
-                    <button type="submit" class="btn btn-primary AdicionarMusica">
-                        <i class="glyphicon glyphicon-ok"></i> Adicionar
-                    </button>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.cd_evento)
+                <div class="col-md-6">
+                    <div class="form-inline">
+                        @Html.LabelFor(model => model.evento_musicas.FirstOrDefault().cd_hino, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.DropDownList("cd_hino", new SelectList(@ViewBag.ddMusicas, "Value", "Text"), new { @class = "form-control" })
+                        <button type="submit" class="btn btn-primary AdicionarMusica">
+                            <i class="glyphicon glyphicon-ok"></i> Adicionar
+                        </button>
+                    </div>
+                    @Html.Partial("_EventoMusicasEdit", Model.evento_musicas)
                 </div>
-                @Html.Partial("_EventoMusicasEdit", Model.evento_musicas)
-            </div>
-        }
-        @using (Html.BeginForm("Create", "evento_integrante"))
+            }
+            @using (Html.BeginForm("Create", "evento_integrante"))
             {
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.dt_evento)
-            <div class="col-md-6">
-                <div class="form-inline">
-                    @Html.LabelFor(model => model.evento_integrantes.FirstOrDefault().cd_integrante, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.DropDownList("cd_integrante", null, htmlAttributes: new { @class = "form-control" })
-                    <button type="submit" class="btn btn-primary AdicionarIntegrante">
-                        <i class="glyphicon glyphicon-ok"></i> Adicionar
-                    </button>
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.cd_evento)
+                <div class="col-md-6">
+                    <div class="form-inline">
+                        @Html.LabelFor(model => model.evento_integrantes.FirstOrDefault().cd_integrante, htmlAttributes: new { @class = "control-label col-md-2" })
+                        @Html.DropDownList("cd_integrante", new SelectList(@ViewBag.ddIntegrantes, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                        <button type="submit" class="btn btn-primary AdicionarIntegrante">
+                            <i class="glyphicon glyphicon-ok"></i> Adicionar
+                        </button>
+                    </div>
+                    @Html.Partial("_EventoIntegrantesEdit", Model.evento_integrantes)
                 </div>
-                @Html.Partial("_EventoIntegrantesEdit", Model.evento_integrantes)
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
-
 
 
 @section Scripts {
@@ -119,9 +148,155 @@
             daysOfWeekHighlighted: "0,6",
             todayHighlight: true
         });
-        $('#datepicker').on('changeDate', function () {
+        $('#datepicker').datepicker('setDate', '@Html.Raw(Model.dt_evento).ToString().Substring(0,10)');
+        $('#datepicker').on('changeDate', function (e) {
+            e.preventDefault();
             var selDate = $('#datepicker').datepicker('getFormattedDate');
-            $('#dt_evento').val(selDate.substring(String(selDate).length - 4, String(selDate).length) + '-' + selDate.substring(3, 5) + '-' + selDate.substring(0, 2));
+            selDate = selDate.split('/').join('-');
+            debugger;
+            $.ajax({
+                type: 'GET',
+                url: '/eventos/EditByDate',
+                data: "dt_evento_string="+selDate,
+                dataType: 'json',
+                success: function (data) {
+                    // Perform redirect
+                    window.location.href = data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Falha no registro de músicas. Tente novamente mais tarde.');
+                }
+            });
+        });
+        $('.ExcluirMusica').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Delete", "evento_musica")',
+                data: {
+                    __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                    cd_evento: @Html.Raw(Model.cd_evento),
+                    cd_hino: $(this).attr('value')
+                },
+                success: function (data) {
+                    // Perform redirect
+                    window.location.href = data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Falha na exclusão da música. Tente novamente mais tarde.');
+                }
+            });
+        });
+        $('.ExcluirIntegrante').click(function (e) {
+            e.preventDefault();
+            integrante = $(this).attr('value');
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Delete", "evento_integrante")',
+                data: {
+                    __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                    cd_evento: @Html.Raw(Model.cd_evento),
+                    cd_integrante: integrante
+                },
+                dataType: 'json',
+                success: function (data) {
+                    // Perform redirect
+                    window.location.href = data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Falha na exclusão do integrante. Tente novamente mais tarde.');
+                }
+            });
+        });
+        $('.AdicionarMusica').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Create", "evento_musica")',
+                async: false,
+                data: {
+                    __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                    cd_evento: @Html.Raw(Model.cd_evento),
+                    cd_hino: $("#cd_hino").val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    // Perform redirect
+                    window.location.href = data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Falha na inclusão da música. Tente novamente mais tarde.');
+                }
+            });
+        });
+        $('.AdicionarIntegrante').click(function (e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Create", "evento_integrante")',
+                async: false,
+                data: {
+                    __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                    cd_evento: @Html.Raw(Model.cd_evento),
+                    cd_integrante: $("#cd_integrante").val()
+                },
+                dataType: 'json',
+                success: function (data) {
+                    // Perform redirect
+                    window.location.href = data;
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Falha na inclusão do integrante. Tente novamente mais tarde.');
+                }
+            });
+        });
+        $('.ExcluirEvento').click(function (e) {
+            e.preventDefault();
+            var ev = @Html.Raw(Model.cd_evento);
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("Delete", "eventos")',
+                data: "id="+ev,
+                success: function (data) {
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Falha na exclusão do evento. Tente novamente mais tarde.');
+                }
+            });
+        });
+        $('.down').click(function () {
+            debugger;
+            var ev = @Html.Raw(Model.cd_evento);
+            var m = $(this).attr('value');
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("MoverMusica", "eventos")',
+                data: "cd_evento=" + ev + "&cd_hino=" + m + "&dir=down",
+                async: false,
+                success: function (data) {
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Falha na ordenação da música. Tente novamente mais tarde.');
+                }
+            });
+            window.location.reload(true);
+        });
+        $('.up').click(function () {
+            debugger;
+            var ev = @Html.Raw(Model.cd_evento);
+            var m = $(this).attr('value');
+            $.ajax({
+                type: 'GET',
+                url: '@Url.Action("MoverMusica", "eventos")',
+                data: "cd_evento=" + ev + "&cd_hino=" + m + "&dir=up",
+                async: false,
+                success: function (data) {
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert('Falha na ordenação da música. Tente novamente mais tarde.');
+                }
+            });
+            window.location.reload(true);
         });
     });
 </script>

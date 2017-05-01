@@ -6,12 +6,12 @@
 
 @{
     @Html.Raw("<br/><ul class='list-group'>")
-    foreach (var item in Model)
+    foreach (var item in Model.OrderBy(ei => ei.integrante.tx_nome_integrante))
     {
         @Html.Raw("<li class='list-group-item'>")
         @Html.DisplayFor(modelItem => item.integrante.tx_nome_curto_integrante)
 
-        <a href="#" id="M_@Html.Raw(item.cd_integrante)" class="Excluir" style="float:right;" value="@Html.Raw(item.cd_integrante)">
+        <a href="#" id="@Html.Raw(item.cd_integrante)" class="ExcluirIntegrante" style="float:right;" value="@Html.Raw(item.cd_integrante)">
             <i class="glyphicon glyphicon-trash" title="Excluir integrante"></i>
             <span class="sr-only">Excluir</span>
         </a>

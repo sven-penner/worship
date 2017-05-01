@@ -28,6 +28,9 @@ namespace Worship
         [StringLength(10, ErrorMessage = "Nome da equipe deve ter no máximo 10 caracteres")]
         [Display(Name = "Nome da equipe")]
         public string tx_nome_equipe { get; set; }
+        [Required(ErrorMessage = "Informe o tipo de evento")]
+        [Display(Name = "Tipo de evento")]
+        public sbyte cd_tipo_evento { get; set; }
         [Required(ErrorMessage = "Escolha o ano de referência")]
         [Range(2016, 2025, ErrorMessage = "Ano inválido")]
         [Display(Name = "Ano")]
@@ -45,5 +48,6 @@ namespace Worship
         public virtual integrante lider { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<evento> eventos { get; set; }
+        public virtual tipo_evento tipo_evento { get; set; }
     }
 }

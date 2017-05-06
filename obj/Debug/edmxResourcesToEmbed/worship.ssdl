@@ -90,6 +90,7 @@
     <Property Name="tx_nome_integrante" Type="varchar" MaxLength="45" Nullable="false" />
     <Property Name="tx_email_integrante" Type="varchar" MaxLength="45" />
     <Property Name="tx_nome_curto_integrante" Type="varchar" MaxLength="15" />
+    <Property Name="foto_integrante" Type="mediumblob" />
   </EntityType>
   <EntityType Name="tipo_evento">
     <Key>

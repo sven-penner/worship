@@ -39,7 +39,7 @@ namespace Worship
         [Display(Name = "Comentário")]
         [DataType(DataType.MultilineText)]
         public string tx_comentarios { get; set; }
-    
+
         public virtual tipo_evento tipo_evento { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<evento_musica> evento_musicas { get; set; }

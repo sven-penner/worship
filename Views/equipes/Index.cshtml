@@ -17,6 +17,9 @@
             @Html.DisplayNameFor(model => model.tx_nome_equipe)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.cd_integrante_lider)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.cd_tipo_evento)
         </th>
         <th>
@@ -24,9 +27,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.nr_domingo)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.cd_integrante_lider)
         </th>
         <th></th>
     </tr>
@@ -36,6 +36,13 @@
         <tr>
             <td>
                 @Html.ActionLink(@Html.Raw(item.tx_nome_equipe).ToString(), "Edit", new { id = item.cd_equipe })
+            </td>
+            <td>
+                @if (item.cd_integrante_lider != null)
+                {
+                    <img src='@Url.Action("GetImage", "integrantes", new { id = item.cd_integrante_lider })' width='100' height='100' /><br />
+                    @Html.DisplayFor(modelItem => item.lider.tx_nome_curto_integrante)
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.tipo_evento.tx_tipo_evento)
@@ -65,9 +72,6 @@
                     }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.lider.tx_nome_integrante)
-            </td>
-            <td>
                 @if (item.nrIntegrantes == 0)
                 {
                     <a href="@Url.Action("Delete", new { id = item.cd_equipe })">
@@ -84,7 +88,7 @@
         else
         {
             <tr>
-                <td colspan='4'></td>
+                <td colspan='5'></td>
                 <td>
                     <a href="@Url.Action("Edit/"+item.cd_equipe, "equipe_integrante")">
                         <i class="glyphicon glyphicon-plus" title="Adicionar integrantes"></i>

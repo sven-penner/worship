@@ -95,6 +95,7 @@
           <Property Name="tx_nome_integrante" Type="varchar" MaxLength="45" Nullable="false" />
           <Property Name="tx_email_integrante" Type="varchar" MaxLength="45" />
           <Property Name="tx_nome_curto_integrante" Type="varchar" MaxLength="15" />
+          <Property Name="foto_integrante" Type="mediumblob" />
         </EntityType>
         <EntityType Name="tipo_evento">
           <Key>
@@ -358,6 +359,7 @@
           <NavigationProperty Name="equipe_integrantes" Relationship="worshipModel.integrante_equipe_integrante" FromRole="integrante" ToRole="equipe_integrante" />
           <NavigationProperty Name="evento_integrantes" Relationship="worshipModel.integrante_evento_integrante" FromRole="integrante" ToRole="evento_integrante" />
           <NavigationProperty Name="equipes" Relationship="worshipModel.integrante_equipe" FromRole="integrante" ToRole="equipe" />
+          <Property Name="foto_integrante" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="tipo_evento">
           <Key>
@@ -631,6 +633,7 @@
           <EntitySetMapping Name="integrante">
             <EntityTypeMapping TypeName="worshipModel.integrante">
               <MappingFragment StoreEntitySet="integrante">
+                <ScalarProperty Name="foto_integrante" ColumnName="foto_integrante" />
                 <ScalarProperty Name="tx_nome_curto_integrante" ColumnName="tx_nome_curto_integrante" />
                 <ScalarProperty Name="tx_email_integrante" ColumnName="tx_email_integrante" />
                 <ScalarProperty Name="tx_nome_integrante" ColumnName="tx_nome_integrante" />

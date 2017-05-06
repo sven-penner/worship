@@ -17,6 +17,16 @@ namespace Worship
         // GET: integrantes
         public ActionResult Index()
         {
+            worshipEntities conn = new worshipEntities();
+            foreach (var integrante in db.integrante)
+            {
+                var count = 0;
+                count += conn.equipe.Count(e => e.cd_integrante_lider == integrante.cd_integrante);
+                count += conn.equipe_integrante.Count(ei => ei.cd_integrante == integrante.cd_integrante);
+                count += conn.evento_integrante.Count(evi => evi.cd_integrante == integrante.cd_integrante);
+                integrante.integrante_em_uso = (count > 0);
+            }
+
             return View(db.integrante.ToList());
         }
 
@@ -46,7 +56,7 @@ namespace Worship
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "cd_integrante,tx_nome_integrante,tx_email_integrante,tx_nome_curto_integrante")] integrante integrante)
+        public ActionResult Create([Bind(Include = "cd_integrante,tx_nome_integrante,tx_email_integrante,tx_nome_curto_integrante")] integrante integrante, HttpPostedFileBase upload_foto)
         {
             if (ModelState.IsValid)
             {
@@ -54,6 +64,11 @@ namespace Worship
                     ModelState.AddModelError("integranteJaExiste", "Integrante já existe");
                 else
                 {
+                    if (upload_foto != null)
+                    {
+                        integrante.foto_integrante = new byte[upload_foto.ContentLength];
+                        upload_foto.InputStream.Read(integrante.foto_integrante, 0, upload_foto.ContentLength);
+                    }
                     db.integrante.Add(integrante);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -83,11 +98,24 @@ namespace Worship
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "cd_integrante,tx_nome_integrante,tx_email_integrante,tx_nome_curto_integrante")] integrante integrante)
+        public ActionResult Edit([Bind(Include = "cd_integrante,tx_nome_integrante,tx_email_integrante,tx_nome_curto_integrante")] integrante integrante, HttpPostedFileBase upload_foto = null)
         {
             if (ModelState.IsValid)
             {
+                integrante integranteAntesDeSalvar = db.integrante.AsNoTracking().Where(i => i.cd_integrante == integrante.cd_integrante).First();
+                byte[] foto = integranteAntesDeSalvar.foto_integrante;
+                integranteAntesDeSalvar = null;
+
                 db.Entry(integrante).State = EntityState.Modified;
+
+                if (upload_foto != null)
+                {
+                    integrante.foto_integrante = new byte[upload_foto.ContentLength];
+                    upload_foto.InputStream.Read(integrante.foto_integrante, 0, upload_foto.ContentLength);
+                } else
+                {
+                    integrante.foto_integrante = foto;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -118,6 +146,48 @@ namespace Worship
             db.integrante.Remove(integrante);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult GetImage(sbyte? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            integrante integrante = db.integrante.Find(id);
+            if (integrante == null)
+            {
+                return HttpNotFound();
+            }
+            byte[] imageData = integrante.foto_integrante;
+            if (imageData != null && imageData.Length > 0)
+            {
+                //return File(imageData, "image/jpg");
+                return new FileStreamResult(new System.IO.MemoryStream(imageData), "image/jpeg");
+            } else
+            {
+                return null;
+            }
+        }
+
+        // POST: integrantes/DelImage/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DelImage(sbyte? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            integrante integrante = db.integrante.Find(id);
+            if (integrante == null)
+            {
+                return HttpNotFound();
+            }
+            integrante.foto_integrante = null;
+            db.Entry(integrante).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("Edit", "integrantes", new { id = integrante.cd_integrante });
         }
 
         protected override void Dispose(bool disposing)

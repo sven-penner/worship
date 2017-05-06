@@ -36,7 +36,11 @@ namespace Worship
         [StringLength(15, ErrorMessage = "Nome curto do integrante deve ter no máximo 15 caracteres")]
         [Display(Name = "Nome curto do integrante")]
         public string tx_nome_curto_integrante { get; set; }
+        [Display(Name = "Foto do integrante")]
+        public byte[] foto_integrante { get; set; }
 
+        public bool integrante_em_uso { get; set; }
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<equipe_integrante> equipe_integrantes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

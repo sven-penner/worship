@@ -308,8 +308,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\images\INAlogo.png" />
-    <Content Include="Content\images\noprofile-64x64.png" />
-    <Content Include="Content\images\noprofile-big.png" />
+    <Content Include="Content\images\noprofile.png" />
     <Content Include="Content\images\sven-64x64.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

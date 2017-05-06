@@ -216,6 +216,7 @@
     <NavigationProperty Name="equipe_integrantes" Relationship="worshipModel.integrante_equipe_integrante" FromRole="integrante" ToRole="equipe_integrante" />
     <NavigationProperty Name="evento_integrantes" Relationship="worshipModel.integrante_evento_integrante" FromRole="integrante" ToRole="evento_integrante" />
     <NavigationProperty Name="equipes" Relationship="worshipModel.integrante_equipe" FromRole="integrante" ToRole="equipe" />
+    <Property Name="foto_integrante" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="tipo_evento">
     <Key>

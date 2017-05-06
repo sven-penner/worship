@@ -24,7 +24,7 @@ namespace Worship
         [Column(Order = 1)]
         [Display(Name = "Integrante")]
         public sbyte cd_integrante { get; set; }
-    
+
         public virtual evento evento { get; set; }
         public virtual integrante integrante { get; set; }
     }

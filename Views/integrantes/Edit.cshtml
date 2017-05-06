@@ -6,8 +6,23 @@
 
 <h2>Editar integrante</h2>
 
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-@using (Html.BeginForm())
+            reader.onload = function (e) {
+                $('#foto')
+                    .attr('src', e.target.result)
+                    .width(240)
+                    .height(240);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+
+@using (Html.BeginForm("Edit", "integrantes", FormMethod.Post, new { enctype="multipart/form-data" } ))
 {
     @Html.AntiForgeryToken()
 
@@ -19,39 +34,62 @@
                 @Html.HiddenFor(model => model.cd_integrante)
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.tx_nome_integrante, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(model => model.tx_nome_integrante, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.tx_nome_integrante, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.tx_nome_integrante, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.tx_email_integrante, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(model => model.tx_email_integrante, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.tx_email_integrante, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.tx_email_integrante, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.tx_nome_curto_integrante, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    @Html.LabelFor(model => model.tx_nome_curto_integrante, htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
                         @Html.EditorFor(model => model.tx_nome_curto_integrante, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.tx_nome_curto_integrante, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
+                    <div class="col-md-offset-3 col-md-9">
                         <input type="submit" value="Salvar" class="btn btn-default" />
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <a href="#" class="thumbnail">
-                    <img src="~/Content/images/noprofile-big.png" />
-                </a>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.foto_integrante, htmlAttributes: new { @class = "control-label col-md-7" })
+                    <input type="hidden" id="foto_integrante" name="foto_integrante" value="@Model.foto_integrante"/>
+                    <div class="col-md-10" style="width: 100%; min-height: 100%">
+                        <figure>
+                            <div class="thumbnail">
+                                @if (Model.foto_integrante != null)
+                                {
+                                    <img id='foto' name='foto' src='@Url.Action("GetImage", "integrantes", new { id = Model.cd_integrante })' title='@Html.Raw(Model.tx_nome_curto_integrante)' width='240' height='240' />
+                                    <span>
+                                        <a href="" title="Excluir imagem" class="ExcluirFoto">
+                                            <i class="glyphicon glyphicon-trash" style="float: right; position: relative; margin-top: 5px; margin-right: 5px"></i>
+                                            <span class="sr-only">Excluir</span>
+                                        </a>
+                                    </span>
+                                }
+                                else
+                                {
+                                    @Html.Raw("<img id='foto' name='foto' src='/Content/images/noprofile.png' alt='Foto do integrante' height='240' width='240' />");
+                                }
+                                <figcaption>Tamanho ideal: 240 x 240</figcaption>
+                            </div>
+                        </figure>
+                        <input type="file" id="upload_foto" name="upload_foto" value="" accept="image/gif, image/jpeg, image/png" class="btn btn-default" onchange="readURL(this);" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -64,3 +102,23 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+<script type="text/javascript">
+    $('.ExcluirFoto').click(function () {
+        debugger;
+        var integrante = @Html.Raw(Model.cd_integrante);
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("DelImage", "integrantes")',
+            async: false,
+            data: {
+                __RequestVerificationToken: $("input[name=__RequestVerificationToken]").val(),
+                id: integrante
+            },
+            success: function (data) {
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert('Falha na exclusão da imagem do integrante. Tente novamente mais tarde.');
+            }
+        });
+    });
+</script>

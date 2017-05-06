@@ -25,7 +25,7 @@ namespace Worship
         [Display(Name = "Música")]
         public short cd_hino { get; set; }
         public Nullable<sbyte> nr_sequencia { get; set; }
-    
+
         public virtual evento evento { get; set; }
         public virtual hino hino { get; set; }
     }

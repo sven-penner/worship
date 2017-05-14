@@ -28,7 +28,7 @@
             @Html.ActionLink(@Html.Raw(item.tx_genero_letra).ToString(), "Edit", new { id = item.cd_genero_letra })
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.nrHinosUsando)
+            <span class="badge">@Html.DisplayFor(modelItem => item.nrHinosUsando)</span>
         </td>
         <td>
             @if (item.nrHinosUsando == 0)

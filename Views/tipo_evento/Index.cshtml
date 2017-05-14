@@ -16,6 +16,9 @@
         <th>
             @Html.DisplayNameFor(model => model.tx_tipo_evento)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nrEventosUsando)
+        </th>
         <th></th>
     </tr>
 
@@ -23,6 +26,9 @@
     <tr>
         <td>
             @Html.ActionLink(@Html.Raw(item.tx_tipo_evento).ToString(), "Edit", new { id = item.cd_tipo_evento })
+        </td>
+        <td>
+            <span class="badge">@Html.DisplayFor(modelItem => item.nrEventosUsando)</span>
         </td>
         <td>
             @if (item.nrEventosUsando == 0)

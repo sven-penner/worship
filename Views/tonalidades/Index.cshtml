@@ -46,7 +46,7 @@
             @if (item.ind_maior_menor == "+") { @Html.Raw("Maior") } else { @Html.Raw("Menor") }
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.nrHinosUsando)
+            <span class="badge">@Html.DisplayFor(modelItem => item.nrHinosUsando)</span>
         </td>
         <td>
             @if (item.nrHinosUsando == 0) { 

@@ -11,9 +11,13 @@ namespace Worship.Controllers
 {
     public class HomeController : Controller
     {
+        private worshipEntities db = new worshipEntities();
+
         public ActionResult Index()
         {
-            return View();
+            evento evento;
+            evento = db.evento.OrderByDescending(e => e.dt_evento).ThenByDescending(e => e.cd_tipo_evento).FirstOrDefault();
+            return View(evento);
         }
     }
 }

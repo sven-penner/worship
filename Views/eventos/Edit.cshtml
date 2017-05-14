@@ -148,16 +148,16 @@
             daysOfWeekHighlighted: "0,6",
             todayHighlight: true
         });
-        $('#datepicker').datepicker('setDate', '@Html.Raw(Model.dt_evento).ToString().Substring(0,10)');
+        $('#datepicker').datepicker('setDate', new Date(@Html.Raw(Model.dt_evento.Year),@Html.Raw(Model.dt_evento.Month)-1,@Html.Raw(Model.dt_evento.Day)));
         $('#datepicker').on('changeDate', function (e) {
             e.preventDefault();
             var selDate = $('#datepicker').datepicker('getFormattedDate');
-            selDate = selDate.split('/').join('-');
+            selDate = selDate.split('/');
             debugger;
             $.ajax({
                 type: 'GET',
                 url: '/eventos/EditByDate',
-                data: "dt_evento_string="+selDate,
+                data: "dt_evento_string="+selDate[2]+"-"+selDate[1]+"-"+selDate[0],
                 dataType: 'json',
                 success: function (data) {
                     // Perform redirect

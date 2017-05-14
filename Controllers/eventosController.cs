@@ -44,8 +44,10 @@ namespace Worship
             // Lista de equipes
             selectListItems = new SelectList(db.equipe.Where(e => e.nr_ano == DateTime.Now.Year).OrderBy(e => e.nr_domingo).ToList(), "cd_equipe", "tx_nome_equipe");
             ViewBag.ddEquipes = new SelectList(DefaultItem.Concat(selectListItems), "Value", "Text");
-
-            ViewBag.dt_evento = dt_evento;
+            if (dt_evento != null)
+            {
+                ViewBag.dt_evento = dt_evento.Value.Day + "-" + dt_evento.Value.Month + "-" + dt_evento.Value.Year;
+            }
             return View();
         }
 
@@ -116,7 +118,7 @@ namespace Worship
             DateTime dt_evento_datetime = new DateTime();
             if (dt_evento_string != null)
             {
-                dt_evento_datetime = DateTime.ParseExact(dt_evento_string, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                dt_evento_datetime = DateTime.ParseExact(dt_evento_string, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
                 evento = db.evento.Where(e => e.dt_evento == dt_evento_datetime).OrderByDescending(e => e.dt_evento).ThenByDescending(e => e.cd_tipo_evento).FirstOrDefault();
             } else
             {

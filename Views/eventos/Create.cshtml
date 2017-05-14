@@ -104,15 +104,16 @@
         debugger;
         var dt = '@Html.Raw(ViewBag.dt_evento)';
         if (dt.length > 0) {
-            dt = dt.substring(0, 10);
-            var dt_evento = dt.substring(0, 2) + '-' + dt.substring(3, 5) + '-' + dt.substring(String(dt).length - 4, String(dt).length);
-            $('#datepicker').datepicker('setDate', dt_evento);
+            dt = dt.split('-');
+            $('#datepicker').datepicker('setDate', new Date(dt[2],dt[1]-1,dt[0]));
             var selDate = $('#datepicker').datepicker('getFormattedDate');
-            $('#dt_evento').val(selDate.substring(String(selDate).length - 4, String(selDate).length) + '-' + selDate.substring(3, 5) + '-' + selDate.substring(0, 2));
+            selDate = selDate.split('/');
+            $('#dt_evento').val(selDate[2] + '-' + selDate[1] + '-' + selDate[0]);
         }
         $('#datepicker').on('changeDate', function () {
             var selDate = $('#datepicker').datepicker('getFormattedDate');
-            $('#dt_evento').val(selDate.substring(String(selDate).length - 4, String(selDate).length) + '-' + selDate.substring(3, 5) + '-' + selDate.substring(0, 2));
+            selDate = selDate.split('/');
+            $('#dt_evento').val(selDate[2] + '-' + selDate[1] + '-' + selDate[0]);
             FiltraEquipes();
         });
     });

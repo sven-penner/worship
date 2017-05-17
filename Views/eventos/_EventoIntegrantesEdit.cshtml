@@ -11,11 +11,11 @@
         @Html.Raw("<li class='list-group-item'>")
         if (item.integrante.tx_nome_curto_integrante == null)
         {
-            @Html.DisplayFor(modelItem => item.integrante.tx_nome_integrante);
+            @Html.ActionLink(@Html.Raw(item.integrante.tx_nome_integrante).ToString(), "Edit", "integrantes", new { id = item.cd_integrante }, null)
         }
         else
         {
-            @Html.DisplayFor(modelItem => item.integrante.tx_nome_curto_integrante);
+            @Html.ActionLink(@Html.Raw(item.integrante.tx_nome_curto_integrante).ToString(), "Edit", "integrantes", new { id = item.cd_integrante }, null)
         }
         <a href="#" id="@Html.Raw(item.cd_integrante)" class="ExcluirIntegrante" style="float:right;" value="@Html.Raw(item.cd_integrante)">
             <i class="glyphicon glyphicon-trash" title="Excluir integrante"></i>

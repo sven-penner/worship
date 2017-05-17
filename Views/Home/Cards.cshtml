@@ -1,4 +1,4 @@
-﻿@model Worship.evento
+﻿@model Worship.Models.CardsViewModel
 
 <div style="display: flex; flex-wrap: wrap; flex: none;">
 
@@ -6,13 +6,13 @@
     {
         <div class="panel panel-default col-sm-3" style="box-shadow: 5px 5px 5px #888888; margin-right: 20px;">
             <div class="panel-heading">
-                <h3 class="panel-title">Músicas de @Html.ValueFor(model => model.dt_evento, "{0:dd/MM/yyyy}")</h3>
+                <h3 class="panel-title">Músicas de @Html.ValueFor(model => model.ultimasMusicas.dt_evento, "{0:dd/MM/yyyy}")</h3>
             </div>
             <div class="panel-body">
-                <p>@Html.Raw(Model.tipo_evento.tx_tipo_evento)</p>
+                <p>@Html.Raw(Model.ultimasMusicas.tipo_evento.tx_tipo_evento)</p>
             </div>
             <table class="table">
-                @foreach (var item in Model.evento_musicas.OrderBy(m => m.nr_sequencia))
+                @foreach (var item in Model.ultimasMusicas.evento_musicas.OrderBy(m => m.nr_sequencia))
                 {
                     <tr><td>@Html.Raw(item.nr_sequencia)</td><td>@Html.Raw(item.hino.tx_titulo_hino)</td></tr>
                 }

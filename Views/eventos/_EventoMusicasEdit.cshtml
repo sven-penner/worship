@@ -11,7 +11,7 @@
     foreach (var item in Model.OrderBy(m => m.nr_sequencia))
     {
         @Html.Raw("<li class='list-group-item'>")
-        @Html.DisplayFor(modelItem => item.hino.tx_titulo_hino)
+        @Html.ActionLink(@Html.Raw(item.hino.tx_titulo_hino).ToString(), "Edit", "hinos", new { id = item.cd_hino }, null)
 
         <a href="#" id="@Html.Raw(item.cd_hino)" class="ExcluirMusica" style="float:right;" value="@Html.Raw(item.cd_hino)">
             <i class="glyphicon glyphicon-trash" title="Excluir música"></i>

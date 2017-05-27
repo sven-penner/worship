@@ -21,5 +21,16 @@
                 <a href="/eventos/EditLastEvent" class="btn btn-primary">Ver evento</a>
             </div>
         </div>
+        <div class="panel panel-default col-sm-3" style="box-shadow: 5px 5px 5px #888888; margin-right: 20px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">Músicas mais tocadas</h3>
+            </div>
+            <table class="table">
+                @foreach (var item in Model.musicasMaisTocadas.OrderByDescending(m => m.qtde).Take(6))
+                {
+                    <tr><td>@Html.Raw(item.musica)</td><td>@Html.Raw(item.qtde)</td></tr>
+                }
+            </table>
+        </div>
     }
 </div>

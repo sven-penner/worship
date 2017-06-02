@@ -15,7 +15,7 @@ namespace Worship.Controllers
     {
         private worshipEntities db = new worshipEntities();
 
-        public int qtde { get; private set; }
+        //public int qtde { get; private set; }
 
         public ActionResult Index()
         {
@@ -31,11 +31,22 @@ namespace Worship.Controllers
             //                                         where hg.id_genero == "L"
             //                                         select em).GroupBy(em => em.cd_hino).Count().ToList();
 
-            var musicasMaisTocadas = (from em in db.evento_musica
+            // Músicas mais tocadas
+            var topicosMaisCantados = (from em in db.evento_musica
+                                      join m in db.hino on em.cd_hino equals m.cd_hino
+                                      join hg in db.hino_genero on m.cd_hino equals hg.cd_hino
+                                      join gl in db.genero_letra on hg.cd_genero equals gl.cd_genero_letra
+                                      where hg.id_genero == "L"
+                                      group em by gl.tx_genero_letra into g
+                                      select new { genero = g.Key, qtde = g.Count() }).OrderByDescending(g => g.qtde).ToList();
+            cards.topicosMaisCantados = topicosMaisCantados.Select(m => new Models.topicoQtde { topico = m.genero, qtde = m.qtde }).ToList();
+
+            // Músicas mais tocadas
+            var musicasMaisCantadas = (from em in db.evento_musica
                                      join m in db.hino on em.cd_hino equals m.cd_hino
                                      group em by m.tx_titulo_hino into g
                                      select new { musica = g.Key, qtde = g.Count() }).OrderByDescending(g => g.qtde).ToList();
-            cards.musicasMaisTocadas = musicasMaisTocadas.Select(m => new Models.musicaQtde { musica = m.musica, qtde = m.qtde }).ToList();
+            cards.musicasMaisCantadas = musicasMaisCantadas.Select(m => new Models.musicaQtde { musica = m.musica, qtde = m.qtde }).ToList();
             
             return View(cards);
         }

@@ -9,12 +9,17 @@ namespace Worship.Models
     public class CardsViewModel
     {
         public evento ultimasMusicas { get; set; }
-        public IList<genero_letra> generosMaisTocados { get; set; }
-        public List<musicaQtde> musicasMaisTocadas { get; set; }
+        public List<topicoQtde> topicosMaisCantados { get; set; }
+        public List<musicaQtde> musicasMaisCantadas { get; set; }
     }
     public class musicaQtde
     {
         public string musica { get; set; }
+        public int qtde { get; set; }
+    }
+    public class topicoQtde
+    {
+        public string topico { get; set; }
         public int qtde { get; set; }
     }
 }

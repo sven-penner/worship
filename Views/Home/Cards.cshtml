@@ -23,12 +23,23 @@
         </div>
         <div class="panel panel-default col-sm-3" style="box-shadow: 5px 5px 5px #888888; margin-right: 20px;">
             <div class="panel-heading">
-                <h3 class="panel-title">Músicas mais tocadas</h3>
+                <h3 class="panel-title">Músicas mais cantadas</h3>
             </div>
             <table class="table">
-                @foreach (var item in Model.musicasMaisTocadas.OrderByDescending(m => m.qtde).Take(6))
+                @foreach (var item in Model.musicasMaisCantadas.OrderByDescending(m => m.qtde).Take(8))
                 {
                     <tr><td>@Html.Raw(item.musica)</td><td>@Html.Raw(item.qtde)</td></tr>
+                }
+            </table>
+        </div>
+        <div class="panel panel-default col-sm-3" style="box-shadow: 5px 5px 5px #888888; margin-right: 20px;">
+            <div class="panel-heading">
+                <h3 class="panel-title">Tópicos mais cantados</h3>
+            </div>
+            <table class="table">
+                @foreach (var item in Model.topicosMaisCantados.OrderByDescending(m => m.qtde).Take(8))
+                {
+                    <tr><td>@Html.Raw(item.topico)</td><td>@Html.Raw(item.qtde)</td></tr>
                 }
             </table>
         </div>
